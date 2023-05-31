@@ -6,19 +6,18 @@ const logger = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
 
+require('dotenv').config()
+require('./config/database')
+require('./config/passport');
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
 const app = express();
 
-require('dotenv').config()
-require('./config/database')
-require('./config/passport');
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -34,6 +33,11 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(function (req, res, next) {
+  res.locals.user = req.user;
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
