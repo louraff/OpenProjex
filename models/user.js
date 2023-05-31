@@ -5,12 +5,14 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   name: String,
+  gitUsername: {type: String, unique: true},
   googleId: {
     type: String,
     required: true
   },
   email: String,
-  avatar: String
+  avatar: String, 
+  bio: String,
 }, {
   timestamps: true
 });
