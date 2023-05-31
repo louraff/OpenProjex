@@ -6,7 +6,7 @@
     <div class="item item 1">
       <div class="flex-ctr">
         <img class="pp" src="<%=user.avatar%>" />
-        <h1><a href="/user/<%=user._id%>">John Smith</a></h1>
+        <h1><a href="/user/<%=user._id%>"><%=user.name%></a></h1>
       </div>
     </div>
 
@@ -30,7 +30,7 @@
 
     <div class="item item-5">
       <div class="flex-ctr">
-        <button>+ Add Project</button>
+        <button type="button" class="new-project">+ Add Project</button>
       </div>
     </div>
   </div>
@@ -47,41 +47,43 @@
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
               <h1>Create post</h1>
-              <div class="close">+</div>
+              <button type="button" class="close">+</button>
 
-              <form action="" method="POST">
+              <h2><%=user.name%></h2>
+
                 <div class="form-group has-error">
-                  <label for="slug"
-                    >Slug <span class="require">*</span>
-                    <small>(This field use in url path.)</small></label
-                  >
-                  <input type="text" class="form-control" name="slug" />
-                  <span class="help-block">Field not entered!</span>
+                  <input type="text" placeholder="Github project link" >
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="title"
                     >Title <span class="require">*</span></label
                   >
                   <input type="text" class="form-control" name="title" />
-                </div>
+                </div> -->
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label for="description">Description</label>
                   <textarea
                     rows="5"
                     class="form-control"
                     name="description"
                   ></textarea>
-                </div>
+                </div> -->
 
                 <div class="form-group">
-                  <p><span class="require">*</span> - required fields</p>
+                    <!-- <input type="text" placeholder="What's your project about?" for="description"> -->
+                    <textarea
+                    rows="5"
+                    class="form-control"
+                    name="description"
+                    placeholder="What's your project about?"
+                  ></textarea>
                 </div>
 
+
                 <div class="form-group">
-                  <button type="submit" class="btn btn-primary">Create</button>
-                  <button class="btn btn-default">Cancel</button>
+                  <button type="submit" class="create">Create</button>
                 </div>
               </form>
             </div>
@@ -90,5 +92,29 @@
       </div>
     </div>
   </form>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script>
+    $(".new-project").click(function () {
+      $(".bg-modal").css("display", "flex");
+    });
+    $(".close").click(function () {
+      $(".bg-modal").css("display", "none");
+    });
+    $(".create").click(function () {
+      $(".bg-modal").css("display", "none");
+    });
+
+    $.ajax("/jquery/submitData", {
+      type: "POST", // http method
+      data: { myData: "This is my data." }, // data to submit
+      success: function (data, status, xhr) {
+        $("p").append("status: " + status + ", data: " + data);
+      },
+      error: function (jqXhr, textStatus, errorMessage) {
+        $("p").append("Error" + errorMessage);
+      },
+    });
+  </script>
 </body>
 <%- include('../partials/footer') %>

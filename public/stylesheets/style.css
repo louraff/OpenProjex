@@ -21,6 +21,10 @@ body {
 .login img {
   height: 2vmin;
 }
+button.new-project {
+  cursor: pointer;
+
+}
 
 .login-button {
     border: 0.2vmin solid blue;
@@ -78,7 +82,7 @@ label small {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* display: none; */
+  display: none;
 }
 
 .modal-content {
@@ -88,10 +92,13 @@ label small {
   border-radius: 2vmin;
 }
 
-.close {
-  position: absolute;
-  top: 0;
-  right: 2vmin;
+button.close {
+  position: relative;
+  bottom: 6vmin;
+  border: 0vmin solid white;
+  border-radius: 5vmin;
+  background-color: white;
+  left: 45vmin;
   font-size: 5vmin;
   transform: rotate(45deg);
   cursor: pointer;
