@@ -1,19 +1,57 @@
 body {
+  display: block;
+  margin: 8px;
+}
+
+body.explore {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin: 0;
+  font-family: Helvetica;
+  height: 100vmin;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  grid-template-rows: 1fr 30px;
+  gap: 5px;
 }
 
 a {
   color: #00B7FF;
 }
 
+main.flex-ctr {
+  background-color: #f3dba8;
+}
+
+div.container {
+  background-color: rgb(239, 172, 247);
+}
+
+.flex-ctr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2vmin;
+  justify-content: center;
+}
+
 .login {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 34px;
+  height: 2vmin;
 }
 
 .login img {
-  height: 30px;
+  height: 2vmin;
 }
+
+.login-button {
+    border: 0.2vmin solid blue;
+    border-radius: 0.7vmin;
+    background-color: lightblue;
+    color: white;
+    padding: 0.1vmin 5vmin;
+}
+
+

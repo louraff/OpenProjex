@@ -1,5 +1,22 @@
 <%- include('./partials/header') %>
 
-<h2>Home Page</h2>
+<div class="flex-ctr">
+  <h1><%= title %></h1>
+</div>
+
+<div class="flex-ctr">
+  <h2>Find and share open source projects today.</h2>
+</div>
+
+<div class="flex-ctr">
+  <h3>
+    Welcome to your <br />
+    coder community
+  </h3>
+  <a href="/auth/google" class="login"
+    ><button class="login-button flex-ctr">
+      Sign in with &nbsp;<img src="https://i.imgur.com/FHjYyi0.png" /></button
+  ></a>
+</div>
 
 <%- include('./partials/footer') %>
