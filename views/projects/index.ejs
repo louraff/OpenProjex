@@ -37,7 +37,23 @@
 
   <!-- PROJECTS FEED -->
 
-  <main class="flex-ctr">MAIN CONTENT</main>
+  <!-- <main class="flex-ctr">
+    <div id="project-list">
+      <h1>MAIN CONTENT</h1>
+    </div>
+  </main> -->
+
+  <main class="flex-ctr">
+  <div id="project-list">
+    <% projects.forEach(function(project) { %>
+      <div class="project-tile">
+        <h2><%= project.createdBy %></h2>
+        <p><%= project.description %></p>
+        <a href="<%= project.projectURL %>">View Project</a>
+      </div>
+    <% }); %>
+  </div>
+</main>
 
   <!-- NEW POST -->
   <form id="new-post" action="/projects" method="POST">
@@ -49,11 +65,20 @@
               <h1>Create post</h1>
               <button type="button" class="close">+</button>
 
-              <h2><%=user.name%></h2>
+              <div class="form-group has-error" name="name"><h2><%=user.name%></h2>
+              </div>
 
-                <div class="form-group has-error">
-                  <input type="text" placeholder="Github project link" >
-                </div>
+              <div class="form-group has-error" name="name">
+            </div>
+            <div class="form-group has-error" name="gitUsername" >
+            </div>
+
+            <div class="form-group has-error" name="avatar"><%=user.avatar%>
+            </div>
+
+              <div class="form-group has-error">
+                <input type="text" name="projectURL" placeholder="Github project link" >
+              </div>
 
                 <!-- <div class="form-group">
                   <label for="title"
@@ -72,8 +97,7 @@
                 </div> -->
 
                 <div class="form-group">
-                    <!-- <input type="text" placeholder="What's your project about?" for="description"> -->
-                    <textarea
+                  <textarea
                     rows="5"
                     class="form-control"
                     name="description"
@@ -93,28 +117,55 @@
     </div>
   </form>
 
-  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  
   <script>
-    $(".new-project").click(function () {
-      $(".bg-modal").css("display", "flex");
+    document.querySelector(".new-project").addEventListener("click", function() {
+        document.querySelector(".bg-modal").style.display = "flex"
     });
-    $(".close").click(function () {
-      $(".bg-modal").css("display", "none");
-    });
-    $(".create").click(function () {
-      $(".bg-modal").css("display", "none");
-    });
+    document.querySelector(".close").addEventListener("click", hidePopup)
+   
+   
+    document.querySelector("#new-post").addEventListener("submit", addNewPost)
+    
+    
+  async function addNewPost(e) {
+  e.preventDefault(); 
 
-    $.ajax("/jquery/submitData", {
-      type: "POST", // http method
-      data: { myData: "This is my data." }, // data to submit
-      success: function (data, status, xhr) {
-        $("p").append("status: " + status + ", data: " + data);
-      },
-      error: function (jqXhr, textStatus, errorMessage) {
-        $("p").append("Error" + errorMessage);
-      },
+  let formData = new FormData(this);
+
+  try {
+    const response = await fetch('/projects', {
+      method: 'POST',
+      body: formData
     });
+    
+    const data = await response.json();
+    console.log('Success:', data);
+
+    hidePopup();
+
+    let projectList = document.getElementById("project-list")
+
+    let projectDiv = document.createElement("div");
+    projectDiv.classList.add("project-tile")
+    projectDiv.innerHTML = `
+    <h2>${data.project.name}</h2>
+    <p>${data.project.description}</p>
+    <a href="${data.project.projectURL}">View Project</a>
+`;
+projectList.appendChild(projectDiv);
+
+  } catch (error) {
+    console.error('Error:', error);
+  }
+};
+
+
+
+  function hidePopup() {
+    document.querySelector(".bg-modal").style.display = "none";
+  }
+    
   </script>
 </body>
 <%- include('../partials/footer') %>

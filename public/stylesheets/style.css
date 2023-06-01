@@ -1,3 +1,10 @@
+
+
+
+
+
+
+
 body {
   display: block;
   margin: 8px;
@@ -64,13 +71,17 @@ h3 {
 }
 
 /* NEW POST FROM EXPLORE PAGE */
-
-.require {
+ .require {
   color: #666;
 }
 label small {
   color: #999;
   font-weight: normal;
+}
+
+.project-tile {
+  color: black;
+  font-size: 5vmin;
 }
 
 .bg-modal {
@@ -103,5 +114,6 @@ button.close {
   transform: rotate(45deg);
   cursor: pointer;
 }
-/* USER PROFILE */
 
+/* USER PROFILE */
+ 
