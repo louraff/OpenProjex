@@ -94,6 +94,7 @@ label small {
   justify-content: center;
   align-items: center;
   display: none;
+   z-index: 9999;
 }
 
 .modal-content {
@@ -237,11 +238,16 @@ body{margin-top:20px;
 .tab-block .tab-content {
   overflow: auto;
   position: relative;
-  z-index: 10;
+  z-index: 1;
   min-height: 125px;
   padding: 16px 12px;
   border: 1px solid #e2e2e2;
   background-color: #FFF;
+}
+
+#tab1, #tab2, #tab3 {
+  position: relative; /* Ensure they're positioned elements */
+  z-index: 1; /* New line added */
 }
 /*===============================================
   Tab Navigation
