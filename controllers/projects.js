@@ -7,9 +7,10 @@ module.exports = {
 }
 
 async function index(req, res, next) {
-    const projects = await Project.find({}).populate("createdBy");
-    res.render('projects/index', {title: 'Open Projex', projects});
+  const projects = await Project.find({}).populate('createdBy');
+  res.render('projects/index', {title: 'Open Projex', projects});
 }
+
 
 
 async function create(req, res) {
