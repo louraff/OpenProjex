@@ -45,13 +45,35 @@ console.log(req.body)
 };
 
 async function deleteProject(req, res) {
-  // Note the cool "dot" syntax to query on the property of a subdoc
-  const projects = await Project.findOne({ 'project._id': req.params.id, 'project.user': req.user._id });
-  // Rogue user!
-  if (!projects) return res.redirect('/index');
-  // Remove the review using the remove method available on Mongoose arrays
-  projects.remove(req.params.id);
-  // Save the updated movie doc
-  await projects.save();
-  res.redirect('projects/index');
+  try {
+      // remove the project with the given id
+      const id = req.params.id;
+
+      await Project.findByIdAndRemove(id);
+      res.redirect('/projects');
+      // res.status(200).json({message: 'Project deleted successfully'});
+
+  } catch (err) {
+      console.log(err);
+      res.redirect('/projects');
+      res.status(500).json({error: 'An error occurred while trying to delete the project'});
+
+  }
 }
+
+// async function deleteProject(req, res) {
+//   try {
+//       // remove the project with the given id
+//       const id = req.params.id;
+
+//       await Project.findByIdAndRemove(id);
+
+//       // send a response with status 200 and a json message
+//       res.status(200).json({message: 'Project deleted successfully'});
+//   } catch (err) {
+//       console.log(err);
+
+//       // send a response with status 500 and a json error message
+//       res.status(500).json({error: 'An error occurred while trying to delete the project'});
+//   }
+// }
