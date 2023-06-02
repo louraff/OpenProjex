@@ -5,10 +5,11 @@
 
 
 
-body {
+/* body {
+  background-color: #eee;
   display: block;
   margin: 8px;
-}
+} */
 
 .flex-ctr {
   display: flex;
@@ -28,18 +29,22 @@ body {
 .login img {
   height: 2vmin;
 }
+
+.login-button {
+  border: 0.2vmin solid blue;
+  border-radius: 0.7vmin;
+  background-color: lightblue;
+  color: white;
+  padding: 0.1vmin 5vmin;
+  cursor: pointer;
+}
+
+
+/* EXPLORE PAGE GENERAL */
+
 button.new-project {
   cursor: pointer;
 
-}
-
-.login-button {
-    border: 0.2vmin solid blue;
-    border-radius: 0.7vmin;
-    background-color: lightblue;
-    color: white;
-    padding: 0.1vmin 5vmin;
-    cursor: pointer;
 }
 
 body.explore {
@@ -59,10 +64,10 @@ a {
 }
 
 main.flex-ctr {
-  background-color: #f3dba8;
+  background-color: #eee;
 }
 
-div.container {
+div.pp-container {
   background-color: rgb(239, 172, 247);
 }
 
@@ -70,7 +75,88 @@ h3 {
   color: pink;
 }
 
-/* NEW POST */
+/* USER PROFILE TILE */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
+
+
+       body{
+        background-color:#545454;
+        font-family: "Poppins", sans-serif;
+        font-weight: 300;
+       }
+
+       .container{
+        height: 100vh;
+       }
+
+       .card {
+
+        width: 380px;
+        border: none;
+        border-radius: 15px;
+        padding: 8px;
+        background-color: #fff;
+        position: relative;
+        height: 370px;
+       }
+
+       .upper{
+
+        height: 100px;
+
+       }
+
+       .upper img{
+
+        width: 100%;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+
+       }
+
+       .user{
+        position: relative;
+       }
+
+       .profile img{
+
+        
+        height: 80px;
+        width: 80px;
+        margin-top:2px;
+
+       
+       }
+
+       .profile{
+
+        position: absolute;
+        top:-50px;
+        left: 38%;
+        height: 90px;
+        width: 90px;
+        border:3px solid #fff;
+
+        border-radius: 50%;
+
+       }
+
+       .follow{
+
+        border-radius: 15px;
+        padding-left: 20px;
+        padding-right: 20px;
+        height: 35px;
+       }
+
+       .stats span{
+
+        font-size: 29px;
+       }
+
+
+/*! NEW POST */
  .require {
   color: #666;
 }
@@ -81,7 +167,7 @@ label small {
 
 .project-tile {
   color: black;
-  font-size: 5vmin;
+  /* font-size: 5vmin; */
 }
 
 .bg-modal {
@@ -120,7 +206,112 @@ h2 {
   font-size: 1vmin;
 }
 
-/* USER PROFILE */
+/*! EXPLORE PAGE POSTS */
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap");
+
+body{
+  background-color: #eee;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+}
+div.container.mt-5.mb-5 {
+  width: 45vmin;
+  border: 0.3vmin solid #d0cdcd;
+    padding: 1vmin;
+    border-radius: 2vmin;
+    margin-bottom: 1vmin;
+}
+div.d-flex.flex-row.align-items-center {
+  display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+div.comment.d-flex.flex-row.align-items-center {
+  display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+span.font-weight-bold {
+  font-size: 2vmin;
+    margin-right: 9vmin;
+}
+  .proj.card {
+    border:none;
+  } 
+  .ellipsis {
+    color: #a09c9c;
+  }
+  hr {
+    color: #a09c9c;
+    margin-top: 4px;
+    margin-bottom: 8px;
+  }
+  .muted-color {
+    color: #a09c9c;
+    font-size: 13px
+  }
+  .ellipsis i {
+    margin-top: 3px;
+    cursor: pointer
+  }
+  .icons i {
+    font-size: 25px
+  }
+  .icons .fa-heart {
+    color: red
+  }
+  .icons .fa-smile-o {
+    color: yellow;
+    font-size: 29px
+  }
+  .rounded-image {
+    border-radius: 50%!important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3vmin;
+    width: 3vmin;
+    margin-top: 1vmin;
+  }
+  .name {
+    font-weight: 600
+  } 
+  .comment-text {
+    font-size: 12px
+  }
+  .status small {
+    margin-right: 10px;
+    color: blue 
+  }
+  .form-control {
+    border-radius: 26px
+  }
+  .comment-input {
+    position: relative;
+    margin-bottom: 1vmin;
+    margin-top: 1vmin;
+  }
+  .fonts {
+    position: absolute;
+    right: 13px;
+    top:8px;
+    color: #a09c9c
+  }
+  .form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border-color: #8bbafe;
+    outline: 0;
+    box-shadow: none;
+  }
+
+
+
+
+
+
+/*! USER PROFILE */
  
 body{margin-top:20px;
   background:#eee;

@@ -9,4 +9,6 @@ router.get('/', projectsCtrl.index);
 
 router.post('/', projectsCtrl.create)
 
+router.delete('/:id', projectsCtrl.delete);
+
 module.exports = router;

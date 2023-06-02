@@ -3,7 +3,8 @@ const User = require('../models/user');
 
 module.exports = {
     index,
-    create
+    create, 
+    delete: deleteProject
 }
 
 async function index(req, res, next) {
@@ -42,3 +43,15 @@ console.log(req.body)
     res.status(422).json(err);
   }
 };
+
+async function deleteProject(req, res) {
+  // Note the cool "dot" syntax to query on the property of a subdoc
+  const projects = await Project.findOne({ 'project._id': req.params.id, 'project.user': req.user._id });
+  // Rogue user!
+  if (!projects) return res.redirect('/index');
+  // Remove the review using the remove method available on Mongoose arrays
+  projects.remove(req.params.id);
+  // Save the updated movie doc
+  await projects.save();
+  res.redirect('projects/index');
+}
