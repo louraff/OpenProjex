@@ -127,10 +127,21 @@
 
   let formData = new FormData(this);
 
+  let object = {};
+
+  formData.forEach(function(value, key){
+    object[key] = value;
+  });
+
+  let json = JSON.stringify(object);
+
   try {
     const response = await fetch('/projects', {
       method: 'POST',
-      body: formData
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: json
     });
     
     const data = await response.json();
@@ -147,14 +158,13 @@
     <p>${data.project.description}</p>
     <a href="${data.project.projectURL}">View Project</a>
 `;
+projectDiv.style.color = "red";
 projectList.prepend(projectDiv);
 
   } catch (error) {
     console.error('Error:', error);
   }
 };
-
-
 
   function hidePopup() {
     document.querySelector(".bg-modal").style.display = "none";

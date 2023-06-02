@@ -11,8 +11,6 @@ async function index(req, res, next) {
   res.render('projects/index', {title: 'Open Projex', projects});
 }
 
-
-
 async function create(req, res) {
   try {
     const user = await User.findById(req.user._id);  
