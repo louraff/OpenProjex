@@ -15,11 +15,7 @@ async function index(req, res, next) {
 
 async function create(req, res) {
   try {
-    // Here you can get the form data from `req.body`
-    // You'll need to use the data to create a new project in your database
-    // Note that I'm making a guess on how your form data is structured, you might need to adjust this
-
-    const user = await User.findById(req.user._id);  // assuming req.user._id contains current user id
+    const user = await User.findById(req.user._id);  
 console.log(user)
 console.log(req.params._id)
 
@@ -28,7 +24,7 @@ console.log(req.params._id)
       gitUsername: req.body.gitUsername,
       projectURL: req.body.projectURL,
       description: req.body.description,
-      createdBy: user._id, // This should be ObjectId not user's name
+      createdBy: user._id, 
       avatar: req.body.avatar
     });
 console.log(req.body)
