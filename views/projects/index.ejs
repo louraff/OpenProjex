@@ -41,7 +41,7 @@
     <div id="project-list">
       <% projects.forEach(function(project) { %>
         <div class="project-tile">
-          <h2><%= user.name %></h2>
+          <h2><%= project.createdBy ? project.createdBy.name : 'Unknown' %></h2>
           <p><%= project.description %></p>
           <a href="<%= project.projectURL %>">View Project</a>
         </div>
@@ -113,63 +113,92 @@
 
   
   <script>
+    // function for hiding popup
+    function hidePopup() {
+      document.querySelector(".bg-modal").style.display = "none";
+    }
+  
+    // function for adding new post
+    async function addNewPost(e) {
+      e.preventDefault(); 
+  
+      let formData = new FormData(this);
+  
+      let object = {};
+  
+      formData.forEach(function(value, key){
+        object[key] = value;
+      });
+  
+      let json = JSON.stringify(object);
+  
+      try {
+        const response = await fetch('/projects', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: json
+        });
+        
+        const data = await response.json();
+        console.log('Success:', data);
+  
+        hidePopup();
+  
+        let projectList = document.getElementById("project-list")
+  
+        let projectDiv = document.createElement("div");
+        projectDiv.classList.add("project-tile")
+        projectDiv.innerHTML = `
+        <h2>${data.user.name}</h2>
+        <p>${data.project.description}</p>
+        <a href="${data.project.projectURL}">View Project</a>
+        `;
+  
+        projectDiv.style.color = "red";
+        projectList.prepend(projectDiv);
+  
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+  
+    // function to load all projects on page load
+    window.onload = async function() {
+      try {
+        const response = await fetch('/projects');
+        const data = await response.json();
+  
+        // data should be an array of projects
+        data.forEach(project => {
+          let projectList = document.getElementById("project-list")
+  
+          let projectDiv = document.createElement("div");
+          projectDiv.classList.add("project-tile")
+          projectDiv.innerHTML = `
+          <h2>${project.createdBy.name}</h2> 
+          <p>${project.description}</p>
+          <a href="${project.projectURL}">View Project</a>
+          `;
+  
+          projectList.prepend(projectDiv);
+        });
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+  
+    // Event Listeners
     document.querySelector(".new-project").addEventListener("click", function() {
         document.querySelector(".bg-modal").style.display = "flex"
     });
+  
     document.querySelector(".close").addEventListener("click", hidePopup)
-   
-   
+  
     document.querySelector("#new-post").addEventListener("submit", addNewPost)
-    
-    
-  async function addNewPost(e) {
-  e.preventDefault(); 
-
-  let formData = new FormData(this);
-
-  let object = {};
-
-  formData.forEach(function(value, key){
-    object[key] = value;
-  });
-
-  let json = JSON.stringify(object);
-
-  try {
-    const response = await fetch('/projects', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: json
-    });
-    
-    const data = await response.json();
-    console.log('Success:', data);
-
-    hidePopup();
-
-    let projectList = document.getElementById("project-list")
-
-    let projectDiv = document.createElement("div");
-    projectDiv.classList.add("project-tile")
-    projectDiv.innerHTML = `
-    <h2>${data.user.name}</h2>
-    <p>${data.project.description}</p>
-    <a href="${data.project.projectURL}">View Project</a>
-`;
-projectDiv.style.color = "red";
-projectList.prepend(projectDiv);
-
-  } catch (error) {
-    console.error('Error:', error);
-  }
-};
-
-  function hidePopup() {
-    document.querySelector(".bg-modal").style.display = "none";
-  }
-    
+  
   </script>
+  
 </body>
 <%- include('../partials/footer') %>

@@ -7,7 +7,8 @@ module.exports = {
 }
 
 async function index(req, res, next) {
-  const projects = await Project.find({}).populate('createdBy');
+  console.log('Fetching all projects');
+  const projects = await Project.find({}).populate('createdBy').sort({createdAt: 'desc'});
   res.render('projects/index', {title: 'Open Projex', projects});
 }
 
@@ -35,6 +36,7 @@ console.log(req.body)
       project: savedProject,
       user: user
     });
+
   } catch (err) {
     console.log(err)
     res.status(422).json(err);

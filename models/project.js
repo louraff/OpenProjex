@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 const projectSchema = new Schema({
     name: String,
-    gitUsername: {type: Schema.Types.ObjectId, ref: 'User'},
+    gitUsername: String,
     projectURL: String,
     description: String,
     createdDate: {type: Date, default: Date.now},
