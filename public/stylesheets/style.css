@@ -80,31 +80,76 @@ h3 {
 @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
 
 
-       body{
+       body .explore {
         background-color:#545454;
         font-family: "Poppins", sans-serif;
         font-weight: 300;
        }
 
-       .container{
+       a.tile {
+        color: white;
+        text-decoration-line: none;
+        margin-left: -1vmin;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    font-size: 3.5vmin;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4vmin;
+       }
+
+       a.tile:hover {
+        text-decoration-line: underline;
+        cursor: pointer;
+       }
+
+       span.text-muted.d-block.mb-2 {
+        display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1vmin;
+    color: #fff;
+    margin-top: -1vmin;
+       }
+
+       h3 {
+        color: white;
+    margin-top: 0vmin;
+    font-size: 3vmin;
+    margin-bottom: 0vmin;
+       }
+
+       .container {
         height: 100vh;
        }
 
-       .card {
-
-        width: 380px;
+       div.pp.tile {
+        height: 50vmin;
+        width: 30vmin;
         border: none;
         border-radius: 15px;
         padding: 8px;
-        background-color: #fff;
+        background-color: #f7931e;
         position: relative;
         height: 370px;
        }
 
+       img#rounded-circle {
+        border-radius: 5.5vmin;
+        height: 10vmin;
+        width: 10vmin;
+        margin-top: -1.5vmin;
+        margin-left: -1.5vmin;
+        border: 0.4vmin solid white;
+        position: absolute;
+        top: -50px;
+        left: 38%;
+       }
+
        .upper{
-
         height: 100px;
-
        }
 
        .upper img{
@@ -112,6 +157,7 @@ h3 {
         width: 100%;
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
+        height: 10vmin;
 
        }
 
@@ -120,16 +166,14 @@ h3 {
        }
 
        .profile img{
-
-        
-        height: 80px;
-        width: 80px;
-        margin-top:2px;
-
-       
+        border-radius: 5vmin;
+        height: 10vmin;
+        width: 10vmin;
+        margin-top: -1.5vmin;
+        margin-left: -1.5vmin;
        }
 
-       .profile{
+       /* .profile{
 
         position: absolute;
         top:-50px;
@@ -140,7 +184,7 @@ h3 {
 
         border-radius: 50%;
 
-       }
+       } */
 
        .follow{
 

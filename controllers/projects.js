@@ -51,7 +51,7 @@ async function deleteProject(req, res) {
 
       await Project.findByIdAndRemove(id);
       res.redirect('/projects');
-      // res.status(200).json({message: 'Project deleted successfully'});
+      res.status(200).json({message: 'Project deleted successfully'});
 
   } catch (err) {
       console.log(err);

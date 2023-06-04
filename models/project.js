@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const CommentSchema = require('./comment').schema; 
+
 const Schema = mongoose.Schema;
 
 const projectSchema = new Schema({
@@ -8,7 +10,7 @@ const projectSchema = new Schema({
     description: String,
     createdDate: {type: Date, default: Date.now},
     createdBy: {type: Schema.Types.ObjectId, ref: 'User'},
-    comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
+    comments: [CommentSchema],
     likes: {type: Schema.Types.ObjectId, ref: 'User'},
     avatar: String
   }, {

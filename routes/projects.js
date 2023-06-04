@@ -3,13 +3,13 @@ const router = express.Router();
 // You'll be creating this controller module next
 const projectsCtrl = require('../controllers/projects');
 // Require the auth middleware
-// const ensureLoggedIn = require('../config/ensureLoggedIn');
+const ensureLoggedIn = require('../config/ensureLoggedIn');
 
-router.get('/', projectsCtrl.index); 
+router.get('/', ensureLoggedIn, projectsCtrl.index); 
 
-router.post('/', projectsCtrl.create)
+router.post('/', ensureLoggedIn, projectsCtrl.create)
 
-router.delete('/:id', projectsCtrl.delete);
+router.delete('/:id', ensureLoggedIn, projectsCtrl.delete);
 
 
 module.exports = router;
