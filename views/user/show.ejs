@@ -73,6 +73,15 @@
       </div>
       <div id="tab2" class="tab-pane">
         <!-- bookmarks content -->
+        <div id="tab2" class="tab-pane">
+          <% user.savedProjects.forEach(function(project) { %>
+            <div class="project-tile">
+              <h2><%= project.title %></h2>
+              <p><%= project.description %></p>
+              <a href="<%= project.projectURL %>">View Project</a>
+            </div>
+          <% }); %>
+        </div>
       </div>
       <div id="tab3" class="tab-pane">
         <!-- media content -->

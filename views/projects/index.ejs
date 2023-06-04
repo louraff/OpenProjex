@@ -103,8 +103,13 @@
                                 <form action="/projects/<%= project._id %>?_method=DELETE" method="POST">
                                   <button type="submit">X</button>
                                 </form>
-                                <div class="d-flex flex-row muted-color"> <span>Comments</span> <span class="ml-2">Bookmark</span> </div>
+                                <form action="/projects/like/<%= project._id %>" method="POST">
+                                  <button type="submit">Like</button>
+                                </form>
+                                <p>Likes: <%= project.likes ? project.likes.length : 0 %></p>
+                                <div class="d-flex flex-row muted-color"> <span>Comments</span> <span class="ml-2"><a href="/projects/save/<%= project._id %>">Bookmark</a></span> </div>
                             </div>
+                            
                             <hr>
                             <% project.comments.forEach(function(comment) { %>
                               <div class="comments">

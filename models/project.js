@@ -11,7 +11,7 @@ const projectSchema = new Schema({
     createdDate: {type: Date, default: Date.now},
     createdBy: {type: Schema.Types.ObjectId, ref: 'User'},
     comments: [CommentSchema],
-    likes: {type: Schema.Types.ObjectId, ref: 'User'},
+    likes: [{type: Schema.Types.ObjectId, ref: 'User'}],
     avatar: String
   }, {
     timestamps: true

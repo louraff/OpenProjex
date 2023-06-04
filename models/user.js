@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
   name: String,
-  gitUsername: {type: String, unique: true},
+  gitUsername: {type: String},
   googleId: {
     type: String,
     required: true
@@ -13,6 +13,10 @@ const userSchema = new Schema({
   email: String,
   avatar: String, 
   bio: String,
+  savedProjects: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Project'  
+}] || []
 }, {
   timestamps: true
 });

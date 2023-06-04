@@ -11,5 +11,11 @@ router.post('/', ensureLoggedIn, projectsCtrl.create)
 
 router.delete('/:id', ensureLoggedIn, projectsCtrl.delete);
 
+router.get('/save/:id', ensureLoggedIn, projectsCtrl.saveProject);
+
+router.post('/like/:id', ensureLoggedIn, projectsCtrl.likeProject);
+
+
+
 
 module.exports = router;
