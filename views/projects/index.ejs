@@ -7,7 +7,7 @@
     <div class="hp-nav">PROFILE</div >
     <div class="hp-nav">LOG OUT</div>
   </nav>
-  
+
   <!--? USER PROFILE TILE -->
 
 
@@ -38,45 +38,17 @@
        <h4 class="mb-0"><a class="tile" href="/user/<%=user._id%>"><%=user.name%></a></h4>
        <span class="text-muted d-block mb-2">@coderrJSmithy</span>
 
+       
        <div class="item item-3">
-        <div class="flex-ctr">
-          <h3>Your Projects</h3>
-        </div>
+          <h3 id="pp-tile-explore">Your Projects</h3>
       </div>
-  
-      <div class="item item-4">
-        <div class="flex-ctr">
-          <h3>Your Bookmarks</h3>
-        </div>
+      <div class="item item-3">
+          <h3 id="pp-tile-explore">Your Bookmarks</h3>
       </div>
-  
+   
 
        <button class="btn btn-primary btn-sm follow new-project">+ Add Project</button>
 
-
-       <div class="d-flex justify-content-between align-items-center mt-4 px-4">
-
-         <div class="stats">
-           <h6 class="mb-0">Followers</h6>
-           <span>8,797</span>
-
-         </div>
-
-
-         <div class="stats">
-           <h6 class="mb-0">Projects</h6>
-           <span>142</span>
-
-         </div>
-
-
-         <div class="stats">
-           <h6 class="mb-0">Ranks</h6>
-           <span>129</span>
-
-         </div>
-         
-       </div>
        
      </div>
       
@@ -98,12 +70,13 @@
                     <div class="proj card">
                         <div class="d-flex justify-content-between p-2 px-3">
                             <div class="d-flex flex-row align-items-center"> <img src="<%=project.createdBy.avatar%>" width="50" class="rounded-circle">
-                                <div class="d-flex flex-column ml-2"> <span class="font-weight-bold"><%= project.createdBy ? project.createdBy.name : 'Unknown' %></span> <small class="text-primary"> <a href="<%= project.projectURL %>">View Project</a></small> </div>
+                                <div class="d-flex flex-column ml-2"> <span class="font-weight-bold"><%= project.createdBy ? project.createdBy.name : 'Unknown' %> </span> <small class="text-primary"> <a href="<%= project.projectURL %>"><button class="goto-proj">Collaborate</button></a></small> </div>
                             </div>
                             <div class="d-flex flex-row mt-1 ellipsis"> <small class="mr-2"><%=project.timestamps%></small> <i class="fa fa-ellipsis-h"></i> </div>
                         </div> 
                         <div class="p-2">
-                            <p class="text-justify"><%=project.description%>></p>
+                          <div class="p-content">
+                            <p class="text-justify"><%=project.description%>></p></div>
                             <hr>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="d-flex flex-row icons d-flex align-items-center"> <i class="fa fa-heart"></i> <i class="fa fa-smile-o ml-2"></i> </div>
@@ -179,8 +152,8 @@
             </div>
 
               <div class="form-group has-error">
-                <select name="projectURL" id="githubRepo">
-                  <option>Select a Github project</option>
+                <input type="text" name="projectURL" placeholder="Github project link" >
+                  <!-- <option>Select a Github project</option> -->
                 </select>
               </div>
 
@@ -243,15 +216,45 @@
   
         let projectList = document.getElementById("project-list")
   
-        let projectDiv = document.createElement("div");
-        projectDiv.classList.add("project-tile")
-        projectDiv.innerHTML = `
-        <h2>${data.user.name}</h2>
-        <p>${data.project.description}</p>
-        <a href="${data.project.projectURL}">View Project</a>
-        `;
+  let projectDiv = document.createElement("div");
+projectDiv.classList.add("container", "mt-5", "mb-5");
+projectDiv.innerHTML = `
+      <div class="row d-flex align-items-center justify-content-center">
+        <div class="col-md-6">
+          <div class="proj card">
+            <div class="d-flex justify-content-between p-2 px-3">
+              <div class="d-flex flex-row align-items-center">
+                <img src="${data.user.avatar}" width="50" class="rounded-circle">
+                <div class="d-flex flex-column ml-2"> 
+                  <span class="font-weight-bold">${data.user.name}</span> 
+                  <small class="text-primary"><a href="${data.project.projectURL}">View Project</a></small> 
+                </div>
+              </div>
+              <div class="d-flex flex-row mt-1 ellipsis">
+                <small class="mr-2">${new Date().toLocaleString()}</small> 
+                <i class="fa fa-ellipsis-h"></i>
+              </div>
+            </div> 
+            <div class="p-2">
+              <p class="text-justify">${data.project.description}</p>
+              <hr>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex flex-row icons d-flex align-items-center">
+                  <i class="fa fa-heart"></i>
+                  <i class="fa fa-smile-o ml-2"></i> 
+                </div>
+                <div class="d-flex flex-row muted-color">
+                  <span>Comments</span>
+                  <span class="ml-2">Bookmark</span>
+                </div>
+              </div>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
   
-        projectDiv.style.color = "red";
         projectList.prepend(projectDiv);
   
       } catch (error) {
@@ -315,6 +318,19 @@
       }
     }
     
+    window.onload = function() {
+    fetch('/api/user/repos')
+      .then(response => response.json())
+      .then(repos => {
+        var select = document.getElementById('githubRepo');
+        repos.forEach(repo => {
+          var opt = document.createElement('option');
+          opt.value = repo.html_url; 
+          opt.innerHTML = repo.name; 
+          select.appendChild(opt);
+        });
+      });
+  };
     
 //     async function deleteProject(e) {
 //   e.preventDefault(); 
