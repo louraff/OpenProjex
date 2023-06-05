@@ -1,5 +1,9 @@
 const Project = require('../models/project');
 const User = require('../models/user');
+const fetch = require('node-fetch');
+const token = process.env.GITHUB_TOKEN;  
+const ROOT_URL = 'https://api.github.com';
+
 
 module.exports = {
     index,
@@ -26,6 +30,28 @@ async function create(req, res) {
     const user = await User.findById(req.user._id);  
 console.log(user)
 console.log(req.params._id)
+
+const gitUsername = req.body.gitUsername;
+
+let gitUser = await User.findOne({ gitUsername });
+
+if (!gitUser) {
+  const options = {
+    headers: {
+      Authorization: `token ${token}`
+    }
+  };
+
+  const userData = await fetch(`${ROOT_URL}/users/${gitUsername}`, options)
+    .then(res => res.json());
+
+  gitUser = new User({
+    gitUsername,
+    gitData: userData,
+  });
+
+  await gitUser.save();
+}
 
     const project = new Project({
       name: req.body.name,

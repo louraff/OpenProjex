@@ -1,6 +1,13 @@
 <%- include('../partials/header') %>
 
 <body class="explore">
+
+  <nav class="hp-container">
+    <div class="hp-nav">HOME</div >
+    <div class="hp-nav">PROFILE</div >
+    <div class="hp-nav">LOG OUT</div>
+  </nav>
+  
   <!--? USER PROFILE TILE -->
 
 
@@ -81,7 +88,7 @@
 
   <!-- PROJECTS FEED -->
 
-  <main class="flex-ctr">
+  <main class=" explore flex-ctr">
     <div id="project-list">
       <% projects.forEach(function(project) { %>
         <div class="project-tile">
@@ -172,7 +179,9 @@
             </div>
 
               <div class="form-group has-error">
-                <input type="text" name="projectURL" placeholder="Github project link" >
+                <select name="projectURL" id="githubRepo">
+                  <option>Select a Github project</option>
+                </select>
               </div>
 
 
@@ -329,7 +338,20 @@
     // Event Listeners
     document.querySelector(".new-project").addEventListener("click", function() {
         document.querySelector(".bg-modal").style.display = "flex"
-    });
+        fetch(`https://api.github.com/users/${user.gitUsername}/repos`)
+    .then(response => response.json())
+    .then(data => {
+      // assuming 'githubRepo' is an id of a select dropdown
+      const select = document.getElementById('githubRepo');
+      data.forEach((repo) => {
+        var opt = document.createElement('option');
+        opt.value = repo.html_url;
+        opt.innerHTML = repo.name;
+        select.appendChild(opt);
+      })
+    })
+    .catch(error => console.error('Error:', error));
+});
   
     document.querySelector(".close").addEventListener("click", hidePopup)
   

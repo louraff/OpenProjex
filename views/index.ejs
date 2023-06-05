@@ -1,23 +1,51 @@
 <%- include('./partials/header') %>
+<body class="login">
+<!-- <nav class="hp-container">
+  <div class="hp-nav">HOME</div >
+  <div class="hp-nav">PROFILE</div >
+  <div class="hp-nav">LOG OUT</div>
+</nav> -->
 
+<main class="login flex-ctr">
 <div class="flex-ctr">
   <!-- <h1><%= title %></h1> -->
 </div>
 
 <div class="flex-ctr">
-  <h2>Find and share open source projects today.</h2>
+  <h2 class="hp-login">Find and share open source projects today with <span class="hp-bold"> Open Projex</span>.</h2>
 </div>
 
-<div class="flex-ctr">
-  <h3>
-    Welcome to your <br />
+<div class="login flex-ctr">
+  <h3 class="hp-login">
+    Welcome to your
     coder community
   </h3>
-  <a href="/api"><button>GitHub Users</button></a>
+
+  <!-- <a href="/api"><button>GitHub Users</button></a> -->
+  <div id="login-buttons">
   <a href="/auth/google" class="login"
-    ><button class="login-button flex-ctr">
-      Sign in with &nbsp;<img src="https://i.imgur.com/FHjYyi0.png" /></button
+    ><button class="login-button google flex-ctr">
+     <!-- <img src="https://i.imgur.com/FHjYyi0.png" />  -->
+     Sign in with Google</button
+  ></a>
+
+  <a href="/auth/github" class="login"
+    ><button class="login-button github flex-ctr">
+      <!-- <img
+        src="https://w7.pngwing.com/pngs/914/758/png-transparent-github-social-media-computer-icons-logo-android-github-logo-computer-wallpaper-banner-thumbnail.png"
+      />  -->
+      Sign in with GitHub </button
   ></a>
 </div>
+</main>
 
-<%- include('./partials/footer') %>
+  <aside class="hp-login">
+  <div class="hp-hero">
+    <img class="hp-hero-img" src="/images/hero.png" />
+  </div>
+  </aside>
+
+</body>
+  <%- include('./partials/footer') %>
+</div>
+

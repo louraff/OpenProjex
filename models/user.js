@@ -5,9 +5,9 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   name: String,
   gitUsername: {type: String},
+  gitData: Object,
   googleId: {
-    type: String,
-    required: true
+    type: String
   },
   email: String,
   avatar: String, 
@@ -15,13 +15,18 @@ const userSchema = new Schema({
   savedProjects: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Project'  
-}] || []
+}] || [],
+githubId: String,
+gitUsername: String,
 }, {
   timestamps: true
 });
 
+const User = mongoose.model('User', userSchema);
 
-// const User = mongoose.model('User', userSchema);
+module.exports = User;
+
+
 
 // User.collection.dropIndex('gitUsername_1', function(err, result) {
 //   if (err) {
@@ -29,4 +34,3 @@ const userSchema = new Schema({
 //   }
 // });
 
-// module.exports = User;

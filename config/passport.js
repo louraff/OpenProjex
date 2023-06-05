@@ -1,5 +1,6 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const GitHubStrategy = require('passport-github2').Strategy;
 const User = require('../models/user');
 
 
@@ -40,3 +41,37 @@ passport.deserializeUser(async function(userId, cb) {
     // It's nice to be able to use await in-line!
     cb(null, await User.findById(userId));
   });
+
+  passport.use(new GitHubStrategy({
+    clientID: process.env.GITHUB_CLIENT_ID,
+    clientSecret: process.env.GITHUB_CLIENT_SECRET,
+    callbackURL: process.env.GITHUB_CALLBACK
+  },
+  async function(accessToken, refreshToken, profile, cb) {
+    console.log(profile);
+    try {
+      let user = await User.findOne({ githubId: profile.id });
+console.log(user);
+      if (user) return cb(null, user);
+
+      user = await User.create({
+        githubId: profile.id,
+        email: profile.email,
+        avatar: profile.avatar,
+        gitUsername: profile.username
+      });
+      return cb(null, user);
+    } catch (err) {
+      return cb(err);
+    }
+  }
+));
+
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user._id);
+});
+
+passport.deserializeUser(async function(userId, cb) {
+  cb(null, await User.findById(userId));
+});

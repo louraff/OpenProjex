@@ -29,6 +29,18 @@ router.get('/oauth2callback', passport.authenticate(
   }
 ));
 
+router.get('/auth/github', passport.authenticate('github', {
+  scope: ['user', 'project', ' public_repo'],
+
+}));
+
+  router.get('/auth/github/callback', 
+  passport.authenticate('github', { successRedirect: '/projects',failureRedirect: '/projects' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+});
+
 // OAuth logout route
 router.get('/logout', function(req, res){
   req.logout(function() {
