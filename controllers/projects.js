@@ -11,8 +11,14 @@ module.exports = {
 
 async function index(req, res, next) {
   console.log('Fetching all projects');
-  const projects = await Project.find({}).populate('createdBy').sort({createdAt: 'desc'});
-  res.render('projects/index', {title: 'Open Projex', projects});
+  const projects = await Project.find({})
+    .populate({
+      path: 'comments.author',
+      model: 'User'
+    })
+    .populate('createdBy')
+    .sort({createdAt: 'desc'});
+  res.render('projects/index', {title: 'Open Projex', projects, currentUser: req.user});
 }
 
 async function create(req, res) {
@@ -48,20 +54,29 @@ console.log(req.body)
 
 async function deleteProject(req, res) {
   try {
-      // remove the project with the given id
       const id = req.params.id;
+      const project = await Project.findById(id);
 
+      // Check if the project exists
+      if (!project) {
+        return res.status(404).send("Project not found.");
+      }
+
+      // Check if the current user is the creator of the project
+      if (project.createdBy.toString() !== req.user._id.toString()) {
+        return res.status(403).redirect('/projects');
+
+      }
+
+      // If the checks pass, delete the project
       await Project.findByIdAndRemove(id);
       res.redirect('/projects');
-      // res.status(200).json({message: 'Project deleted successfully'});
-
   } catch (err) {
       console.log(err);
       res.redirect('/projects');
-      // res.status(500).json({error: 'An error occurred while trying to delete the project'});
-
   }
 }
+
 
 async function saveProject(req, res) {
   try {

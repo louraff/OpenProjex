@@ -51,50 +51,38 @@ async function createComment(req, res) {
 
   async function deleteComment(req, res) {
     try {
-
-        console.log('Deleting comment with id:', req.params.id);
-
-        const projectId = req.params.projectId;
-        const commentId = req.params.id;
-   
-        console.log('Project ID' + projectId)
-        console.log('Comment ID' + commentId)
+      const projectId = req.params.projectId;
+      const commentId = req.params.commentId;
+      const project = await Project.findById(projectId);
   
-        // find the project
-        const project = await Project.findById(projectId);
-        if (!project) {
-            return res.status(404).json({message: 'Project not found'});
-        }
+      // Check if the project exists
+      if (!project) {
+        return res.status(404).send("Project not found.");
+      }
   
-        // find the comment index
-        // const commentIndex = project.comments.findIndex(comment => comment.id === commentId);
-        // if (commentIndex === -1) {
-        //     return res.status(404).json({message: 'Comment not found'});
-        // }
-
-        const commentIndex = project.comments.findIndex(comment => comment._id.toString() === commentId);
-
-        if (commentIndex === -1) {
-            return res.status(404).json({ message: 'Comment not found' });
-        }
-
-        const deletedComment = project.comments[commentIndex];
-        console.log('Deleted comment:', deletedComment);
-        
+      // Find the comment in the project
+      const comment = project.comments.id(commentId);
   
-        // remove the comment
-        project.comments.splice(commentIndex, 1);
-        await project.save();
-
-        console.log('Successfully deleted comment with id:', commentId);
-
+      // Check if the comment exists
+      if (!comment) {
+        return res.status(404).send("Comment not found.");
+      }
   
-        res.redirect('/projects');
+      // Check if the current user is the author of the comment
+      if (comment.author.toString() !== req.user._id.toString()) {
+        return res.status(403).send("Unauthorized action.");
+      }
+  
+      // If the checks pass, delete the comment
+      comment.remove();
+      await project.save();
+  
+      res.redirect(`/projects/${projectId}`);
     } catch (err) {
-        console.log(err);
-        res.status(500).json({error: 'An error occurred while trying to delete the comment'});
+      console.log(err);
+      res.status(500).send("An error occurred while trying to delete the comment.");
     }
   }
-
+  
 
 

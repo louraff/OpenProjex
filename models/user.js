@@ -1,4 +1,3 @@
-//! Minimal schema defined so OAuth can be installed. COME BACK TO THIS
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
@@ -21,4 +20,13 @@ const userSchema = new Schema({
   timestamps: true
 });
 
-module.exports = mongoose.model('User', userSchema);
+
+// const User = mongoose.model('User', userSchema);
+
+// User.collection.dropIndex('gitUsername_1', function(err, result) {
+//   if (err) {
+//       console.log('Error in dropping index!', err);
+//   }
+// });
+
+// module.exports = User;

@@ -15,6 +15,7 @@ const indexRouter = require('./routes/index');
 const projectsRouter = require('./routes/projects');
 const usersRouter = require('./routes/user');
 const commentsRouter = require('./routes/comments');
+const apisRouter = require('./routes/api');
 
 const app = express();
 
@@ -45,10 +46,10 @@ app.use(function (req, res, next) {
 
 
 app.use('/', indexRouter);
-// app.use(ensureAuthenticated);
 app.use('/projects', projectsRouter)
 app.use('/user', usersRouter);
 app.use('/', commentsRouter);
+app.use('/api', apisRouter);
 
 
 // catch 404 and forward to error handler
