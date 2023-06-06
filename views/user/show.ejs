@@ -1,219 +1,94 @@
 <%- include('../partials/header') %>
 
-<section id="content" class="container">
-  <!-- Begin .page-heading -->
-  <div class="page-heading">
-    <div class="media clearfix">
-      <div class="media-left pr30">
-        <a href="#">
-          <img class="media-object mw150" src="<%=user.avatar%>" alt="..." />
-        </a>
+<body class="explore">
+  <!--? USER PROFILE TILE -->
+
+  <div class="container d-flex justify-content-center align-items-center">
+    <div class="pp tile">
+      <div class="upper">
+        <img
+          src="https://wallpaperaccess.com/full/39608.jpg"
+          class="img-fluid"
+        />
       </div>
-      <div class="flex-ctr">
-        <button type="button" id="new-project-pp">+ Add Project</button>
+
+      <div class="user text-center">
+        <!-- <div class="profile"> -->
+
+        <img src="<%=user.avatar%>" id="rounded-circle" width="80" />
+
+        <!-- </div> -->
       </div>
-      <div class="media-body va-m">
-        <h2 class="media-heading">
-          <%=user.name%>
-          <small><%=user.gitUsername%></small>
-        </h2>
-        <p class="lead">
-          Lorem ipsum dolor sit amet ctetur adicing elit, sed do eiusmod tempor
-          incididunt
-        </p>
-        <div class="media-links">
-          <ul class="list-inline list-unstyled">
-            <li>
-              <a href="#" title="linkedin link">
-                <span class="fa fa-linkedin-square fs35 text-info"></span>
-              </a>
-            </li>
-            <li>
-              <a href="#" title="github link">
-                <span class="fa fa-github-square fs35 text-dark"></span>
-              </a>
-            </li>
-            <li>
-              <a href="#" title="external link">
-                <span class="fa fa-external-link-square fs35 text-muted"></span>
-              </a>
-            </li>
-          </ul>
+
+      <div class="mt-5 text-center">
+        <h4 class="mb-0">
+          <a class="tile" href="/user/<%=user._id%>"><%=user.name%></a>
+        </h4>
+        <span class="text-muted d-block mb-2">@coderrJSmithy</span>
+
+        <div class="item item-3">
+          <h3 id="pp-tile-explore">Your Projects</h3>
+        </div>
+        <div class="item item-3">
+          <h3 id="pp-tile-explore">Your Bookmarks</h3>
+        </div>
+
+        <button class="btn btn-primary btn-sm follow new-project">
+          + Add Project
+        </button>
+
+        <div class="explore-logout">
+          <a href="/" id="explore-logout-a">logout</a>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="tab-block">
-    <ul class="nav nav-tabs">
-      <li class="active">
-        <a href="#tab1" data-toggle="tab">Your Projects</a>
-      </li>
-      <li>
-        <a href="#tab2" data-toggle="tab">Your Bookmarks</a>
-      </li>
-      <li>
-        <a href="#tab3" data-toggle="tab">Media</a>
-      </li>
-    </ul>
-  
-    <div class="tab-content">
-      <div id="tab1" class="tab-pane active">
-        <main class="flex-ctr">
-          <div id="project-list">
-            <% projects.forEach(function(project) { %>
-                <div class="project-tile">
-                  <h2><%= project.createdBy %></h2>
-                  <p><%= project.description %></p>
-                  <a href="<%= project.projectURL %>">View Project</a>
-                </div>
-            <% }); %>
-          </div>
-        </main>
-      </div>
-      <div id="tab2" class="tab-pane">
-        <!-- bookmarks content -->
-        <div id="tab2" class="tab-pane">
-          <% user.savedProjects.forEach(function(project) { %>
-            <div class="project-tile">
-              <h2><%= project.title %></h2>
-              <p><%= project.description %></p>
-              <a href="<%= project.projectURL %>">View Project</a>
-            </div>
-          <% }); %>
-        </div>
-      </div>
-      <div id="tab3" class="tab-pane">
-        <!-- media content -->
-      </div>
-    </div>
-  </div>
+  <script>
+    document
+      .querySelector("#new-project-pp")
+      .addEventListener("click", function () {
+        document.querySelector(".bg-modal").style.display = "flex";
+      });
+    document.querySelector(".close").addEventListener("click", hidePopup);
 
-    <!-- <main class="flex-ctr">
-        <div id="project-list">
-          <% projects.forEach(function(project) { %>
-            <div class="project-tile">
-              <h2><%= project.createdBy %></h2>
-              <p><%= project.description %></p>
-              <a href="<%= project.projectURL %>">View Project</a>
-            </div>
-          <% }); %>
-        </div>
-      </main> -->
-      
+    document.querySelector("#new-post").addEventListener("submit", addNewPost);
 
-</section>
+    async function addNewPost(e) {
+      e.preventDefault();
 
- <!-- NEW POST -->
- <form id="new-post" action="/projects" method="POST">
-    <div class="bg-modal">
-      <div class="modal-content">
-        <div class="new-post-container">
-          <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-              <h1>Create post</h1>
-              <button type="button" class="close">+</button>
-
-              <div class="form-group has-error" name="name"><h2><%=user.name%></h2>
-              </div>
-
-              <div class="form-group has-error" name="name">
-            </div>
-            <div class="form-group has-error" name="gitUsername" >
-            </div>
-
-            <div class="form-group has-error" name="avatar"><%=user.avatar%>
-            </div>
-
-              <div class="form-group has-error">
-                <input type="text" name="projectURL" placeholder="Github project link" >
-              </div>
-
-                <!-- <div class="form-group">
-                  <label for="title"
-                    >Title <span class="require">*</span></label
-                  >
-                  <input type="text" class="form-control" name="title" />
-                </div> -->
-
-                <!-- <div class="form-group">
-                  <label for="description">Description</label>
-                  <textarea
-                    rows="5"
-                    class="form-control"
-                    name="description"
-                  ></textarea>
-                </div> -->
-
-                <div class="form-group">
-                  <textarea
-                    rows="5"
-                    class="form-control"
-                    name="description"
-                    placeholder="What's your project about?"
-                  ></textarea>
-                </div>
-
-
-                <div class="form-group">
-                  <button type="submit" class="create">Create</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
-
-    <script>
-        document.querySelector("#new-project-pp").addEventListener("click", function() {
-            document.querySelector(".bg-modal").style.display = "flex"
-        });
-        document.querySelector(".close").addEventListener("click", hidePopup)
-       
-       
-        document.querySelector("#new-post").addEventListener("submit", addNewPost)
-        
-        
-      async function addNewPost(e) {
-      e.preventDefault(); 
-    
       let formData = new FormData(this);
-    
+
       try {
-        const response = await fetch('/projects', {
-          method: 'POST',
-          body: formData
+        const response = await fetch("/projects", {
+          method: "POST",
+          body: formData,
         });
-        
+
         const data = await response.json();
-        console.log('Success:', data);
-    
+        console.log("Success:", data);
+
         hidePopup();
-    
-        let projectList = document.getElementById("project-list")
-    
+
+        let projectList = document.getElementById("project-list");
+
         let projectDiv = document.createElement("div");
-        projectDiv.classList.add("project-tile")
+        projectDiv.classList.add("project-tile");
         projectDiv.innerHTML = `
         <h2>${data.project.name}</h2>
         <p>${data.project.description}</p>
         <a href="${data.project.projectURL}">View Project</a>
     `;
-    projectList.appendChild(projectDiv);
-    
+        projectList.appendChild(projectDiv);
       } catch (error) {
-        console.error('Error:', error);
+        console.error("Error:", error);
       }
-    };
-    
-    
-    
-      function hidePopup() {
-        document.querySelector(".bg-modal").style.display = "none";
-      }
-        
-      </script> 
+    }
+
+    function hidePopup() {
+      document.querySelector(".bg-modal").style.display = "none";
+    }
+  </script>
 
   <%- include('../partials/footer') %>
+</body>

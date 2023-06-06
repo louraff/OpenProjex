@@ -1,6 +1,8 @@
 const Project = require('../models/project');
 const Comment = require('../models/comment')
 const User = require('../models/user');
+const moment = require('moment');
+
 
 
 module.exports = {
@@ -43,11 +45,17 @@ async function createComment(req, res) {
 
 
 
-  async function newComment(req, res) {
-    //Sort performers by their name
-    const comments = await Comment.find({})
-    res.render('projects/index', { comments });
-  }
+async function newComment(req, res) {
+  let comments = await Comment.find({});
+
+  comments = comments.map(comment => {
+      comment = comment.toObject(); 
+      comment.timeSince = moment(comment.created_at).fromNow();
+      return comment;
+  });
+
+  res.render('projects/index', { comments });
+}
 
   async function deleteComment(req, res) {
     try {

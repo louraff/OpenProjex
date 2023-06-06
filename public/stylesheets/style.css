@@ -36,14 +36,16 @@ h2.hp-login {
   font-weight: 300;
   margin-top: -49vmin;
   margin-left: 20vmin;
-  color: #4f2652;
+  color: #002347
+  ;
 
 }
 
 h3.hp-login {
   font-size: 2vmin;
     font-weight: 300;
-    color: #4f2652;
+    color: #002347
+    ;
     margin-top: -26vmin;
     margin-bottom: 2vmin;
     margin-left: 4vmin;}
@@ -137,20 +139,18 @@ body.explore {
   height: 100vmin;
   display: grid;
   grid-template-columns: 1fr 5fr;
-  grid-template-rows: 50px 1fr 30px;
+  grid-template-rows: 1fr 30px;
   gap: 4vmin
 ; /* specifies width of grid lines */
   grid-template-areas:
-  "item-1 item-1"
   "item-2 item-3"
   "item-2 item-3"; 
   font-family: 'Montserrat', sans-serif;
-background-color: #e6ecf2;
-
+background-color: #002347;
 }
 
 main.explore.flex-ctr {
-  background-color: #e6ecf2;
+  background-color: #002347;
   display: flex;
   flex-direction: column;
   justify-content: start;
@@ -158,6 +158,11 @@ main.explore.flex-ctr {
  grid-area: item-3;
 }
 
+p.text-justify {
+  color: #002347;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+}
 
 /* USER PROFILE TILE */
 
@@ -225,8 +230,8 @@ main.explore.flex-ctr {
         padding: 8px;
         background-color: white;
         position: relative;
-        height: 32vmin;
-                margin-top: 2vmin;
+        height: 34vmin;
+        margin-top: 2vmin;
         margin-left: 10vmin;
        }
 
@@ -276,7 +281,8 @@ button.btn.btn-primary.btn-sm {
     background-color: #fb7160;
     color: white;
     font-size: 1.5vmin;
-}
+    margin-bottom: 1.5vmin;
+  }
 
 button.btn.btn-primary.btn-sm:hover {
 background-color: #fa5c4c;
@@ -321,6 +327,33 @@ label small {
   color: black;
   /* font-size: 5vmin; */
 
+  div.col-md-8 {
+    margin-left: 3vmin;
+  }
+
+  h1.cp {
+    font-family: 'Montserrat';
+    font-weight: 300;
+    margin-bottom: 0;
+  }
+
+  h2.cp2 {
+    margin-top: -4vmin;
+    font-size: 2vmin;
+  }
+div.cp-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1vmin;
+}
+input.link {
+  width: 42vmin;
+  border: 0.2vmin;
+}
+div.form-control-description {
+  width: 42vmin;
+  border: 0.2vmin;
+}
 
 .bg-modal {
   width: 100%;
@@ -345,6 +378,10 @@ label small {
 div.p-content {
   white-space: normal;
   word-wrap: break-word;
+  font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    width: 57vmin;
+    
 }
 
 button.close {
@@ -362,6 +399,12 @@ button.close {
 h2 {
   font-size: 1vmin;
 }
+div#interactions {
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+}
+
 
 /*! EXPLORE PAGE POSTS */
 
@@ -392,7 +435,29 @@ div.comment.d-flex.flex-row.align-items-center {
 }
 span.font-weight-bold {
   font-size: 2vmin;
-  margin-right: 36vmin;
+  margin-right: 35vmin;
+    color: #003f7d;
+}
+a#explore-logout-a {
+  color: #cdd8e5;
+  margin-left: 7.5vmin;
+  font-size: 0.4vmin;
+  text-decoration-line: none;
+}
+a#explore-logout-a:hover {
+  color: #b4c5d8;
+}
+button.goto-proj {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  border: 0.2vmin solid #fb7160;
+  border-radius: 3vmin;
+  background-color: #fb7160;
+  color: white;
+  font-size: 1.5vmin;
+  padding: 0.5vmin;
+  padding-left: 1vmin;
+  padding-right: 1vmin;
 }
   .proj.card {
     border:none;
@@ -401,7 +466,7 @@ span.font-weight-bold {
     color: #a09c9c;
   }
   hr {
-    color: #a09c9c;
+    color: #e6ecf2;
     margin-top: 4px;
     margin-bottom: 8px;
   }
@@ -445,8 +510,33 @@ span.font-weight-bold {
     margin-right: 10px;
     color: blue 
   }
-  .form-control {
-    border-radius: 26px
+  input.form-control {
+    border-radius: 26px;
+    width: 58vmin;
+    border: 0.1vmin solid #e6ecf2;
+    background-color: #e6ecf2;
+    height: 2.5vmin;
+    text-indent: 1vmin;
+  }
+  form {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: -1vmin;
+  }
+  input::placeholder {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 0.5vmin;
+    color: #9caabb;
+    }
+  button#comment-button {
+    background-color: white;
+    border: 0vmin;
+
+  }
+  img.comment-img {
+    height: 3vmin;
+    cursor: pointer;
   }
   .comment-input {
     position: relative;
@@ -467,9 +557,24 @@ span.font-weight-bold {
     box-shadow: none;
   }
 
+div.d-flex.justify-content-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
 
+img#like-button {
+  cursor: pointer;
+    height: 4vmin;
+    margin-right: 0.5vmin;
+}
 
-
+p {
+  font-family: montserrat;
+  font-weight: 300;
+  font-size: 1.5vmin;
+  color: #9caabb;
+}
 
 
 /*! USER PROFILE */

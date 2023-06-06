@@ -2,11 +2,6 @@
 
 <body class="explore">
 
-  <nav class="hp-container">
-    <div class="hp-nav">HOME</div >
-    <div class="hp-nav">PROFILE</div >
-    <div class="hp-nav">LOG OUT</div>
-  </nav>
 
   <!--? USER PROFILE TILE -->
 
@@ -49,6 +44,10 @@
 
        <button class="btn btn-primary btn-sm follow new-project">+ Add Project</button>
 
+       <div class="explore-logout">
+        <a href="/" id="explore-logout-a">logout</a>
+       </div>
+
        
      </div>
       
@@ -79,17 +78,24 @@
                             <p class="text-justify"><%=project.description%>></p></div>
                             <hr>
                             <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex flex-row icons d-flex align-items-center"> <i class="fa fa-heart"></i> <i class="fa fa-smile-o ml-2"></i> </div>
-                                <% if (currentUser && currentUser.id == project.createdBy._id) { %>
-                                  <form action="/projects/<%= project._id %>?_method=DELETE" method="POST">
-                                    <button type="submit">X</button>
-                                  </form>
-                                <% } %>
-                                <form action="/projects/like/<%= project._id %>" method="POST">
-                                  <button type="submit">Like</button>
+                              <div class="d-flex flex-row icons d-flex align-items-center">
+                                <i class="fa fa-heart"></i> 
+                                <i class="fa fa-smile-o ml-2"></i> 
+                              </div>
+                              <form id="like-form" action="/projects/like/<%= project._id %>" method="POST">
+                                
+                                <img id="like-button" data-project-id="<%= project._id %>" src="/images/likeOpt.png" alt="Like" style="cursor: pointer; width: 40px;">
+
+                              </form>
+                              <p> <%= project.likes ? project.likes.length : 0 %></p>
+                              <div class="d-flex flex-row muted-color"> 
+                                <span class="ml-2"><a href="/projects/save/<%= project._id %>"> <img id="bookmark-icon" src="/images/noBookmark.png" data-project-id="<%= project._id %>" style="cursor:pointer;"></a></span> 
+                              </div>
+                              <% if (currentUser && currentUser.id == project.createdBy._id) { %>
+                                <form action="/projects/<%= project._id %>?_method=DELETE" method="POST">
+                                  <button type="submit">X</button>
                                 </form>
-                                <p>Likes: <%= project.likes ? project.likes.length : 0 %></p>
-                                <div class="d-flex flex-row muted-color"> <span>Comments</span> <span class="ml-2"><a href="/projects/save/<%= project._id %>">Bookmark</a></span> </div>
+                              <% } %>
                             </div>
                             
                             <hr>
@@ -102,7 +108,7 @@
                     
                                     <small class="comment-text"><%= comment.text %></small>
                                     <div class="comment d-flex flex-row align-items-center status"> 
-                                      <small>Like</small> <small>Save</small> 
+                                    
                                       <small><%= comment.created_at %></small> 
                                       <% if (currentUser && currentUser.id == comment.author._id) { %>
                                         <form action="/projects/<%= project._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
@@ -116,8 +122,9 @@
                             <% }); %>
                             <div class="comment-input">
                               <form action="/projects/<%= project._id %>/comments" method="POST">
-                                <input type="text" name="text" class="form-control">
-                                <button type="submit" class="comment-button">Send</button>
+                                <input type="text" name="text" class="form-control" placeholder="Share your comment here
+                                ">
+                                <button type="submit" id="comment-button"><img src="/images/send.png" class="comment-img"></button>
                               </form>
                             </div>
                           </div>
@@ -137,10 +144,10 @@
         <div class="new-post-container">
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
-              <h1>Create post</h1>
+              <h1 class="cp">Create post</h1>
               <button type="button" class="close">+</button>
 
-              <div class="form-group has-error" name="name"><h2><%=user.name%></h2>
+              <div class="form-group has-error" name="name"><h2 class="cp2"><%=user.name%></h2>
               </div>
 
               <div class="form-group has-error" name="name">
@@ -148,25 +155,27 @@
             <div class="form-group has-error" name="gitUsername" >
             </div>
 
-            <div class="form-group has-error" name="avatar"><%=user.avatar%>
+            <div class="form-group has-error" name="avatar"><img src="<%=user.avatar%>"">
             </div>
 
+            <div class="cp-fields">
               <div class="form-group has-error">
-                <input type="text" name="projectURL" placeholder="Github project link" >
+                <input type="text" name="projectURL" placeholder="Github project link" class="link">
                   <!-- <option>Select a Github project</option> -->
                 </select>
               </div>
 
 
                 <div class="form-group">
-                  <textarea
+                  <input type="text"
                     rows="5"
-                    class="form-control"
+                    class="form-control-description"
                     name="description"
                     placeholder="What's your project about?"
-                  ></textarea>
+                  
+                  ></input>
                 </div>
-
+              </div>
 
                 <div class="form-group">
                   <button type="submit" class="create">Create</button>
@@ -188,7 +197,7 @@
   
     // function for adding new post
     async function addNewPost(e) {
-      e.preventDefault(); 
+      // e.preventDefault(); 
   
       let formData = new FormData(this);
   
@@ -256,19 +265,18 @@ projectDiv.innerHTML = `
     `;
   
         projectList.prepend(projectDiv);
+        location.reload();
   
       } catch (error) {
         console.error('Error:', error);
       }
     };
   
-    // function to load all projects on page load
     window.onload = async function() {
       try {
         const response = await fetch('/projects');
         const data = await response.json();
   
-        // data should be an array of projects
         data.forEach(project => {
           let projectList = document.getElementById("project-list")
   
@@ -374,6 +382,49 @@ projectDiv.innerHTML = `
     document.querySelector("#new-post").addEventListener("submit", addNewPost)
 
     // document.querySelector('#delete-form').addEventListener('submit', deleteProject)
+
+    let likeButton = document.getElementById('like-button');
+let isLiked = localStorage.getItem('liked');  
+
+likeButton.src = isLiked === 'true' ? "/images/like.png" : "/images/likeOpt.png";
+
+likeButton.addEventListener('click', async function(e) {
+  e.preventDefault();
+  
+  try {
+    // Send the request to the server
+    let response = await fetch(`/projects/like/${e.target.dataset.projectId}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    // If the request was successful, toggle the like state and the image source.
+    if (response.ok) {
+      isLiked = isLiked !== 'true';
+      localStorage.setItem('liked', isLiked);  
+      likeButton.src = isLiked === 'true' ? "/images/like.png" : "/images/likeOpt.png";
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+});
+
+const bookmarkIcon = document.getElementById('bookmark-icon');
+
+  bookmarkIcon.addEventListener('click', function() {
+    fetch(`/projects/save/${this.dataset.projectId}`, {
+      method: 'POST'
+    })
+    .then(response => response.json())
+.then(data => {
+  console.log(data);
+
+  if (data.isBookmarked) {
+    this.src = '/path/to/bookmark.png';
+  } else {
+    this.src = '/path/to/noBookmark.png';
+  }
+});
 
   
   </script>
