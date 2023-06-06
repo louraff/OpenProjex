@@ -192,9 +192,17 @@ p.text-justify {
 
 @import url("https://fonts.googleapis.com/css2?family=Poppins:weight@100;200;300;400;500;600;700;800&display=swap");
 
+a.YP, a.YB {
+  color: #003f7d;
+  text-decoration-line: none;
+}
 
+a.YP:hover, a.YB:hover {
+  color: #fa5c4c;
+  cursor: pointer;
+}
 
-       a.tile {
+       a.tile.PP {
         color: #003366;
         text-decoration-line: none;
         margin-left: -1vmin;
@@ -209,8 +217,8 @@ p.text-justify {
     font-weight: 500;
        }
 
-       a.tile:hover {
-        text-decoration-line: underline;
+       a.tile.PP:hover {
+        color: #668cb1;
         cursor: pointer;
        }
 
@@ -362,14 +370,15 @@ background-color: #fa5c4c;
        }
 
        button.del-comment {
-        background-color: #f2f2f2;
-    border: white;
-    color: white;
-    font-size: 1.5vmin;
-    border-radius: 0.5vmin;
-    padding: 0.5vmin;
-    position: absolute;
-    margin-left: 16.5vmin;
+        background-color: #e6ecf2;
+        border: white;
+        color: #8495ab;
+        font-size: 1vmin;
+        border-radius: 0.5vmin;
+        padding: 0.5vmin;
+        position: absolute;
+        margin-left: 16.5vmin;
+        font-weight: 300;
        }
        button.del-comment:hover {
         cursor: pointer;
@@ -389,9 +398,12 @@ background-color: #fa5c4c;
 
        img#bookmark-icon {
         cursor: pointer;
-    height: 3.5vmin;
+    height: 3vmin;
     margin-left: 0.8vmin;
     margin-bottom: -0.5vmin;
+       }
+       img#bookmark-icon:hover {
+        height: 3.2vmin;
        }
 
 /*! NEW POST */
@@ -507,10 +519,14 @@ div.d-flex.flex-row.align-items-center {
   justify-content: start;
 }
 div.d-flex.flex-row.mb-2 {
-  background-color: #f2f2f2;
+  background-color: #e6ecf2;
   padding: 1vmin 2vmin;
   margin-bottom: 1.5vmin;
   border-radius: 2vmin;
+}
+hr.line {
+  border: 0.1vmin solid #e6ecf2;
+    margin-bottom: 1.5vmin;
 }
 div.comment.d-flex.flex-row.align-items-center {
   display: flex;
@@ -630,6 +646,9 @@ button.goto-proj {
     height: 3vmin;
     cursor: pointer;
   }
+  img.comment-img:hover {
+    height: 3.1vmin;
+  }
   .comment-input {
     position: relative;
     margin-bottom: 1vmin;
@@ -657,8 +676,11 @@ button.goto-proj {
   
   img#like-button {
     cursor: pointer;
-      height: 4vmin;
+      height: 3.5vmin;
       margin-right: 0.5vmin;
+  }
+  img#like-button:hover {
+height: 3.7vmin
   }
   
   p {
