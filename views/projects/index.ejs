@@ -2,11 +2,11 @@
 
 <body class="explore">
 
-  <nav class="hp-container">
+  <!-- <nav class="hp-container">
     <div class="hp-nav">HOME</div >
     <div class="hp-nav">PROFILE</div >
     <div class="hp-nav">LOG OUT</div>
-  </nav>
+  </nav> -->
 
   <!--? USER PROFILE TILE -->
 
@@ -49,6 +49,9 @@
 
        <button class="btn btn-primary btn-sm follow new-project">+ Add Project</button>
 
+       <div class="explore-logout">
+        <a href="/" id="explore-logout-a">logout</a>
+       </div>
        
      </div>
       
@@ -102,7 +105,7 @@
                     
                                     <small class="comment-text"><%= comment.text %></small>
                                     <div class="comment d-flex flex-row align-items-center status"> 
-                                      <small>Like</small> <small>Save</small> 
+                                    
                                       <small><%= comment.created_at %></small> 
                                       <% if (currentUser && currentUser.id == comment.author._id) { %>
                                         <form action="/projects/<%= project._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
@@ -116,8 +119,9 @@
                             <% }); %>
                             <div class="comment-input">
                               <form action="/projects/<%= project._id %>/comments" method="POST">
-                                <input type="text" name="text" class="form-control">
-                                <button type="submit" class="comment-button">Send</button>
+                                <input type="text" name="text" class="form-control" placeholder="Share your comment here
+                                ">
+                                <button type="submit" id="comment-button"><img src="/images/send.png" class="comment-img"></button>
                               </form>
                             </div>
                           </div>
@@ -137,36 +141,34 @@
         <div class="new-post-container">
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
-              <h1>Create post</h1>
-              <button type="button" class="close">+</button>
+              <h1 class="cp">Create post</h1>
+                            <button type="button" class="close">+</button>
 
-              <div class="form-group has-error" name="name"><h2><%=user.name%></h2>
-              </div>
-
-              <div class="form-group has-error" name="name">
-            </div>
+              <div class="form-group has-error" name="name"><h2 class="cp2"><%=user.name%></h2>
+                            </div>
             <div class="form-group has-error" name="gitUsername" >
             </div>
 
-            <div class="form-group has-error" name="avatar"><%=user.avatar%>
-            </div>
+            <div class="form-group has-error" name="avatar"><img src="<%=user.avatar%>">
+                        </div>
 
-              <div class="form-group has-error">
-                <input type="text" name="projectURL" placeholder="Github project link" >
-                  <!-- <option>Select a Github project</option> -->
-                </select>
-              </div>
+                        <div class="cp-fields">
+                          <div class="form-group has-error">
+                            <input type="text" name="projectURL" placeholder="Github project link" class="link">
+                              <!-- <option>Select a Github project</option> -->
+                            </select>
+                          </div>
 
 
                 <div class="form-group">
-                  <textarea
+                  <input type="text"
                     rows="5"
-                    class="form-control"
+                    class="form-control-description"
                     name="description"
                     placeholder="What's your project about?"
-                  ></textarea>
+                  ></input>
                 </div>
-
+              </div>
 
                 <div class="form-group">
                   <button type="submit" class="create">Create</button>
@@ -188,8 +190,7 @@
   
     // function for adding new post
     async function addNewPost(e) {
-      e.preventDefault(); 
-  
+      // e.preventDefault();   
       let formData = new FormData(this);
   
       let object = {};
@@ -256,6 +257,7 @@ projectDiv.innerHTML = `
     `;
   
         projectList.prepend(projectDiv);
+        location.reload();
   
       } catch (error) {
         console.error('Error:', error);
