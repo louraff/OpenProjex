@@ -69,9 +69,13 @@ div.hp-nav {
   margin: 10px;
   color: #f3dba8;
 }
-
+/* 
 nav.hp-container > div.hp-nav:last-child {
   margin-left: auto /*Assigning auto makes the left margin of the nav's last div to take up available space.*/
+
+
+div.d-flex.justify-content-between > div.hp-nav:last-child {
+  margin-left: auto; /*Assigning auto makes the left margin of the nav's last div to take up available space.*/
 }
 
 .flex-ctr {
@@ -147,11 +151,11 @@ body.explore {
   "item-2 item-3"
   "item-2 item-3"; 
   font-family: 'Montserrat', sans-serif;
-  background-color: #002347;
+  background-color: #f2f2f2;
 }
 
 main.explore.flex-ctr {
-  background-color: #002347;
+  background-color: #f2f2f2;
     display: flex;
   flex-direction: column;
   justify-content: start;
@@ -424,8 +428,8 @@ div.container.mt-5.mb-5 {
 }
 div.d-flex.flex-row.align-items-center {
   display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  flex-direction: row;
+  justify-content: start;
 }
 div.comment.d-flex.flex-row.align-items-center {
   display: flex;
@@ -434,7 +438,7 @@ div.comment.d-flex.flex-row.align-items-center {
 }
 span.font-weight-bold {
   font-size: 2vmin;
-  margin-right: 35vmin;
+  /* margin-right: 35vmin; */
     color: #003f7d;
 }
 a#explore-logout-a {
@@ -453,10 +457,11 @@ button.goto-proj {
   border-radius: 3vmin;
   background-color: #fb7160;
   color: white;
-  font-size: 1.5vmin;
-  padding: 0.5vmin;
+  font-size: .8vmin;
+  padding: 0.2vmin;
   padding-left: 1vmin;
   padding-right: 1vmin;
+  margin-top: 0.4vmin;
 }
   .proj.card {
     border:none;
@@ -489,6 +494,9 @@ button.goto-proj {
   }
   img.rounded-circle {
     border-radius: 3vmin;
+    height: 5vmin;
+    width: 5vmin;
+    margin-right: 1vmin;
   }
   .rounded-image {
     border-radius: 50%!important;
@@ -556,9 +564,9 @@ button.goto-proj {
     box-shadow: none;
   }
 
-  div.d-flex.justify-content-between {
+  div.d-flex.flex-column.ml-2 {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: start;
   }
   

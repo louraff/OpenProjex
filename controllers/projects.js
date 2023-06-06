@@ -66,11 +66,8 @@ console.log(req.body)
 
     const savedProject = await project.save();
     
-    res.json({
-      message: 'Project created successfully',
-      project: savedProject,
-      user: user
-    });
+    res.redirect('/projects');
+
 
   } catch (err) {
     console.log(err)
