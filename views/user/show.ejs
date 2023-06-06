@@ -104,56 +104,42 @@
 
 </section>
 
- <!-- NEW POST -->
- <form id="new-post" action="/projects" method="POST">
+ 
+  <!-- NEW POST -->
+  <form id="new-post" action="/projects" method="POST">
     <div class="bg-modal">
       <div class="modal-content">
         <div class="new-post-container">
           <div class="row">
             <div class="col-md-8 col-md-offset-2">
-              <h1>Create post</h1>
-              <button type="button" class="close">+</button>
+              <h1 class="cp">Create post</h1>
+                            <button type="button" class="close">+</button>
 
-              <div class="form-group has-error" name="name"><h2><%=user.name%></h2>
-              </div>
-
-              <div class="form-group has-error" name="name">
-            </div>
+              <div class="form-group has-error" name="name"><h2 class="cp2"><%=user.name%></h2>
+                            </div>
             <div class="form-group has-error" name="gitUsername" >
             </div>
 
-            <div class="form-group has-error" name="avatar"><%=user.avatar%>
-            </div>
+            <div class="form-group has-error" name="avatar"><img src="<%=user.avatar%>">
+                        </div>
 
-              <div class="form-group has-error">
-                <input type="text" name="projectURL" placeholder="Github project link" >
-              </div>
+                        <div class="cp-fields">
+                          <div class="form-group has-error">
+                            <input type="text" name="projectURL" placeholder="Github project link" class="link">
+                              <!-- <option>Select a Github project</option> -->
+                            </select>
+                          </div>
 
-                <!-- <div class="form-group">
-                  <label for="title"
-                    >Title <span class="require">*</span></label
-                  >
-                  <input type="text" class="form-control" name="title" />
-                </div> -->
-
-                <!-- <div class="form-group">
-                  <label for="description">Description</label>
-                  <textarea
-                    rows="5"
-                    class="form-control"
-                    name="description"
-                  ></textarea>
-                </div> -->
 
                 <div class="form-group">
-                  <textarea
+                  <input type="text"
                     rows="5"
-                    class="form-control"
+                    class="form-control-description"
                     name="description"
                     placeholder="What's your project about?"
-                  ></textarea>
+                  ></input>
                 </div>
-
+              </div>
 
                 <div class="form-group">
                   <button type="submit" class="create">Create</button>
@@ -176,39 +162,137 @@
         document.querySelector("#new-post").addEventListener("submit", addNewPost)
         
         
-      async function addNewPost(e) {
-      e.preventDefault(); 
-    
+        async function addNewPost(e) {
+      // e.preventDefault();   
       let formData = new FormData(this);
-    
+  
+      let object = {};
+  
+      formData.forEach(function(value, key){
+        object[key] = value;
+      });
+  
+      let json = JSON.stringify(object);
+  
       try {
         const response = await fetch('/projects', {
           method: 'POST',
-          body: formData
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: json
         });
         
         const data = await response.json();
         console.log('Success:', data);
-    
+  
         hidePopup();
-    
+  
         let projectList = document.getElementById("project-list")
-    
-        let projectDiv = document.createElement("div");
-        projectDiv.classList.add("project-tile")
-        projectDiv.innerHTML = `
-        <h2>${data.project.name}</h2>
-        <p>${data.project.description}</p>
-        <a href="${data.project.projectURL}">View Project</a>
+  
+  let projectDiv = document.createElement("div");
+projectDiv.classList.add("container", "mt-5", "mb-5");
+projectDiv.innerHTML = `
+      <div class="row d-flex align-items-center justify-content-center">
+        <div class="col-md-6">
+          <div class="proj card">
+            <div class="d-flex justify-content-between p-2 px-3">
+              <div class="d-flex flex-row align-items-center">
+                <img src="${data.user.avatar}" width="50" class="rounded-circle">
+                <div class="d-flex flex-column ml-2"> 
+                  <span class="font-weight-bold">${data.user.name}</span> 
+                  <small class="text-primary"><a href="${data.project.projectURL}">View Project</a></small> 
+                </div>
+              </div>
+              <div class="d-flex flex-row mt-1 ellipsis">
+                <small class="mr-2">${new Date().toLocaleString()}</small> 
+                <i class="fa fa-ellipsis-h"></i>
+              </div>
+            </div> 
+            <div class="p-2">
+              <p class="text-justify">${data.project.description}</p>
+              <hr>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex flex-row icons d-flex align-items-center">
+                  <i class="fa fa-heart"></i>
+                  <i class="fa fa-smile-o ml-2"></i> 
+                </div>
+                <div class="d-flex flex-row muted-color">
+                  <span>Comments</span>
+                  <span class="ml-2">Bookmark</span>
+                </div>
+              </div>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
     `;
-    projectList.appendChild(projectDiv);
-    
+  
+        projectList.prepend(projectDiv);
+        location.reload();
+  
       } catch (error) {
         console.error('Error:', error);
       }
     };
+
+    window.onload = async function() {
+      try {
+        const response = await fetch('/projects');
+        const data = await response.json();
+  
+        // data should be an array of projects
+        data.forEach(project => {
+          let projectList = document.getElementById("project-list")
+  
+          let projectDiv = document.createElement("div");
+    projectDiv.classList.add("container", "mt-5", "mb-5");
+    projectDiv.innerHTML = `
+      <div class="row d-flex align-items-center justify-content-center">
+        <div class="col-md-6">
+          <div class="proj card">
+            <div class="d-flex justify-content-between p-2 px-3">
+              <div class="d-flex flex-row align-items-center">
+                <img src="${data.user.avatar}" width="50" class="rounded-circle">
+                <div class="d-flex flex-column ml-2"> 
+                  <span class="font-weight-bold">${data.user.name}</span> 
+                  <small class="text-primary"><a href="${data.project.projectURL}">View Project</a></small> 
+                </div>
+              </div>
+              <div class="d-flex flex-row mt-1 ellipsis">
+                <small class="mr-2">${new Date().toLocaleString()}</small> 
+                <i class="fa fa-ellipsis-h"></i>
+              </div>
+            </div> 
+            <div class="p-2">
+              <p class="text-justify">${data.project.description}</p>
+              <hr>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex flex-row icons d-flex align-items-center">
+                  <i class="fa fa-heart"></i>
+                  <i class="fa fa-smile-o ml-2"></i> 
+                </div>
+                <div class="d-flex flex-row muted-color">
+                  <span>Comments</span>
+                  <span class="ml-2">Bookmark</span>
+                </div>
+              </div>
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  
+          projectList.prepend(projectDiv);
+        });
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
     
-    
+    document.querySelector("#new-post").addEventListener("submit", addNewPost)
     
       function hidePopup() {
         document.querySelector(".bg-modal").style.display = "none";
