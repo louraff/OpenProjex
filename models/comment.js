@@ -7,4 +7,8 @@ const CommentSchema = new Schema({
     created_at: {type: Date, default: Date.now}
   });
 
+  CommentSchema.methods.getFormattedDate = function() {
+    return `${this.created_at.toLocaleDateString()} ${this.created_at.toLocaleTimeString()}`;
+};
+
   module.exports = mongoose.model('Comment', CommentSchema);

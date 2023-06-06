@@ -53,6 +53,11 @@ h3.hp-login {
 span.hp-bold {
   font-weight: 500;
 }
+span.name{
+  color: #8495ab;
+  font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+}
 
 nav.hp-container {
   display: flex;
@@ -74,8 +79,19 @@ nav.hp-container > div.hp-nav:last-child {
   margin-left: auto /*Assigning auto makes the left margin of the nav's last div to take up available space.*/
 
 
-div.d-flex.justify-content-between > div.hp-nav:last-child {
-  margin-left: auto; /*Assigning auto makes the left margin of the nav's last div to take up available space.*/
+div.d-flex.justify-content-between {
+  display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+
+div#avatar-name {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  gap: 0.3vmin;
 }
 
 .flex-ctr {
@@ -166,7 +182,7 @@ main.explore.flex-ctr {
 p.text-justify {
   color: #002347;
   font-family: 'Montserrat', sans-serif;
-  font-weight: 500;
+  font-weight: 300;
 }
 
 /* USER PROFILE TILE */
@@ -318,6 +334,11 @@ background-color: #fa5c4c;
         font-size: 29px;
        }
 
+       small.time {
+        color: #8495ab;
+        font-weight: 300
+        ;
+       }
 
 /*! NEW POST */
  .require {
@@ -423,13 +444,17 @@ div.container.mt-5.mb-5 {
     border: 0.2vmin solid white;
     padding: 1vmin;
     border-radius: 2vmin;
-    margin-bottom: 1vmin;
+    margin-bottom: 4vmin;
     background-color: white;
 }
 div.d-flex.flex-row.align-items-center {
   display: flex;
   flex-direction: row;
   justify-content: start;
+}
+div.d-flex.flex-row.mb-2 {
+  margin-left: 1vmin;
+  margin-top: -0.7vmin;
 }
 div.comment.d-flex.flex-row.align-items-center {
   display: flex;
@@ -511,12 +536,15 @@ button.goto-proj {
     font-weight: 600
   } 
   .comment-text {
-    font-size: 12px
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    color: #002347;
   }
-  .status small {
+  /* .status small {
     margin-right: 10px;
     color: blue 
-  }
+  } */
   input.form-control {
     border-radius: 26px;
     width: 58vmin;

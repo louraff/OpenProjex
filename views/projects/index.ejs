@@ -91,7 +91,7 @@
                                 <form action="/projects/like/<%= project._id %>" method="POST">
                                   <button type="submit">Like</button>
                                 </form>
-                                <p>Likes: <%= project.likes ? project.likes.length : 0 %></p>
+                                <!-- <p> <%= project.likes ? project.likes.length : 0 %></p> -->
                                 <div class="d-flex flex-row muted-color">  <span class="ml-2"><a href="/projects/save/<%= project._id %>">Bookmark</a></span> </div>
                             </div>
                             
@@ -99,14 +99,16 @@
                             <% project.comments.forEach(function(comment) { %>
                               <div class="comments">
                                 <div class="d-flex flex-row mb-2"> 
+                                  <div id="avatar-name">
                                   <img src="<%= comment.author.avatar %>" width="40" class="rounded-image">
                                   <div class="d-flex flex-column ml-2"> 
                                     <span class="name"><%= comment.author.name %></span> 
-                    
+                                  </div>
+                                  </div>
                                     <small class="comment-text"><%= comment.text %></small>
                                     <div class="comment d-flex flex-row align-items-center status"> 
                                     
-                                      <small><%= comment.created_at %></small> 
+                                      <small class="time"><%= comment.created_at %></small> 
                                       <% if (currentUser && currentUser.id == comment.author._id) { %>
                                         <form action="/projects/<%= project._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
                                           <button type="submit">X</button>
