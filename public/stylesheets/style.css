@@ -57,6 +57,7 @@ span.name{
   color: #8495ab;
   font-family: 'Montserrat', sans-serif;
     font-weight: 500;
+    position: absolute;
 }
 
 nav.hp-container {
@@ -88,10 +89,12 @@ div.d-flex.justify-content-between {
 
 div#avatar-name {
   display: flex;
-  flex-direction: row;
-  justify-content: start;
-  align-items: center;
-  gap: 0.3vmin;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    gap: 0.3vmin;
+    margin-bottom: 1vmin;
+    margin-top: -1vmin;
 }
 
 .flex-ctr {
@@ -336,8 +339,8 @@ background-color: #fa5c4c;
 
        small.time {
         color: #8495ab;
-        font-weight: 300
-        ;
+        font-weight: 300;
+        margin-top: 1vmin;
        }
 
        button#delete-proj {
@@ -356,6 +359,39 @@ background-color: #fa5c4c;
         cursor: pointer;
         color: #8495ab;
         font-size: 1.8vmin;
+       }
+
+       button.del-comment {
+        background-color: #f2f2f2;
+    border: white;
+    color: white;
+    font-size: 1.5vmin;
+    border-radius: 0.5vmin;
+    padding: 0.5vmin;
+    position: absolute;
+    margin-left: 16.5vmin;
+       }
+       button.del-comment:hover {
+        cursor: pointer;
+        color: #8495ab;
+        font-size: 1.8vmin;
+        
+       }
+
+       button.likebtn {
+        background-color: white;
+        border: solid white 0.1vmin;
+        height: 2vmin;
+        width: 2vmin;
+        margin-bottom: 3vmin;
+        margin-right: 1.5vmin;
+       }
+
+       img#bookmark-icon {
+        cursor: pointer;
+    height: 3.5vmin;
+    margin-left: 0.8vmin;
+    margin-bottom: -0.5vmin;
        }
 
 /*! NEW POST */
@@ -471,8 +507,10 @@ div.d-flex.flex-row.align-items-center {
   justify-content: start;
 }
 div.d-flex.flex-row.mb-2 {
-  margin-left: 1vmin;
-  margin-top: -0.7vmin;
+  background-color: #f2f2f2;
+  padding: 1vmin 2vmin;
+  margin-bottom: 1.5vmin;
+  border-radius: 2vmin;
 }
 div.comment.d-flex.flex-row.align-items-center {
   display: flex;
@@ -548,6 +586,7 @@ button.goto-proj {
     align-items: center;
     height: 3vmin;
     width: 3vmin;
+    margin-right: 0.5vmin;
     margin-top: 1vmin;
   }
   .name {
