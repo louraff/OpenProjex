@@ -340,6 +340,24 @@ background-color: #fa5c4c;
         ;
        }
 
+       button#delete-proj {
+        margin-left: 40vmin;
+        margin-top: -3.5vmin;
+        background-color: #e6ecf2;
+        border: white;
+        color: #9caabb;
+        font-size: 1.5vmin;
+        border-radius: 0.5vmin;
+        padding: 0.5vmin;
+        position: absolute;
+       }
+
+       button#delete-proj:hover {
+        cursor: pointer;
+        color: #8495ab;
+        font-size: 1.8vmin;
+       }
+
 /*! NEW POST */
  .require {
   color: #666;
