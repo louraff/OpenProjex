@@ -26,6 +26,22 @@ main.login.flex-ctr {
   grid-area: item-2;
 
 }
+div.upper {
+  background-color: #002347;
+    border-top-right-radius: 1vmin;
+    border-top-left-radius: 1vmin;
+}
+
+h1#hero-title {
+  width: 100vmin;
+    transform: rotate(270deg);
+    margin-top: 100vmin;
+    margin-left: -75vmin;
+    font-size: 12vmin;
+    position: absolute;
+    color: #002347;
+    white-space: nowrap;
+}
 
 aside.hp-login {
   grid-area: item-3;
@@ -158,7 +174,7 @@ button.new-project {
 
 body.explore {
   padding: 50px;
-    margin: 0;
+    
   height: 100vmin;
   display: grid;
   grid-template-columns: 1fr 5fr;
@@ -171,6 +187,7 @@ body.explore {
   "item-2 item-3"; 
   font-family: 'Montserrat', sans-serif;
   background-color: #f2f2f2;
+  margin-left: 35vmin;
 }
 
 main.explore.flex-ctr {
@@ -180,6 +197,7 @@ main.explore.flex-ctr {
   justify-content: start;
   align-items: start;
  grid-area: item-3;
+ margin-left: -5vmin;
 }
 
 p.text-justify {
@@ -261,10 +279,10 @@ a.YP:hover, a.YB:hover {
         border-radius: 15px;
         padding: 8px;
         background-color: white;
-        position: relative;
+        position: fixed;
         height: 34vmin;
         margin-top: 2vmin;
-        margin-left: 10vmin;
+        margin-right: 15vmin;
        }
 
        img#rounded-circle {
@@ -426,45 +444,109 @@ label small {
   h1.cp {
     font-family: 'Montserrat';
     font-weight: 300;
-    margin-bottom: 0;
+    margin-bottom: -1vmin;
+    color: #002347;
+    font-size: 2.5vmin;
   }
 
   h2.cp2 {
-    margin-top: -4vmin;
-    font-size: 2vmin;
+    margin-top: -3vmin;
+    font-size: 1.5vmin;
+    color: #002347;
   }
 div.cp-fields {
   display: flex;
   flex-direction: column;
   gap: 1vmin;
 }
+div#np-icon {
+  display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: end;
+}
+img.cp-img {
+  height: 3vmin;
+  border-radius: 2vmin;
+  margin-right: 0.5vmin;
+}
+hr#post {
+  border: 0.1vmin solid #e6ecf2;
+    margin-top: -5vmin;
+    margin-right: 4vmin;
+}
+hr#post2 {
+  border: 0.1vmin solid #e6ecf2;
+  margin-right: 15vmin;
+  width: 23vmin;
+  margin-bottom: -1vmin;
+}
 input.link {
-  width: 42vmin;
+  width: 25vmin;
   border: 0.2vmin;
-}
-div.form-control-description {
-  width: 42vmin;
-  border: 0.2vmin;
-}
+  margin-top: 1vmin;
+  font-size: 1.5vmin;
+  height: 1.5vmin;
+  font-family: montserrat;
+    font-weight: 300;
+    color: #002347;
 
+}
+input.form-control-description {
+  width: 22vmin;
+    border: 0.2vmin solid white;
+    height: 8vmin;
+    word-wrap: break-word;
+    font-family: montserrat;
+    font-weight: 300;
+    color: #002347;
+    font-size: 1.5vmin;
+}
+input.form-control-description::placeholder {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin-top: -3vmin;
+  font-size: 1.5vmin;
+  text-align: left;
+  vertical-align: top;
+}
+button.create {
+  margin-top: 1vmin;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    border: 0.2vmin solid #fb7160;
+    border-radius: 3vmin;
+    background-color: #fb7160;
+    color: white;
+    font-size: 1.5vmin;
+    padding-right: 1.5vmin;
+    padding-left: 1.5vmin;
+    padding-top: 0.5vmin;
+    padding-bottom: 0.5vmin;
+    margin-left: -0.5vmin;
+}
 .bg-modal {
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  position: absolute;
+  background-color: rgba(225, 225, 225, 0.7);
+  position: fixed;
   top: 0;
-  display: flex;
+  bottom: 0;
+  right: 0;
+  left: 0;
   justify-content: center;
   align-items: center;
   display: none;
-   z-index: 9999;
+  z-index: 9999;
 }
 
 .modal-content {
-  width: 50vmin;
-  height: 40vmin;
-  background-color: white;
-  border-radius: 2vmin;
+  width: 30vmin;
+    height: 30vmin;
+    background-color: white;
+    border-radius: 2vmin;
 }
 
 div.p-content {
@@ -476,7 +558,10 @@ div.p-content {
 }
 
 button.close {
+  margin-bottom: -1vmin;
+  margin-top: 2vmin;
   position: relative;
+  margin-left: -23vmin;
   bottom: 6vmin;
   border: 0vmin solid white;
   border-radius: 5vmin;
@@ -485,6 +570,11 @@ button.close {
   font-size: 5vmin;
   transform: rotate(45deg);
   cursor: pointer;
+  color: #e6ecf2;
+}
+
+button.close:hover {
+  color: #747d85;
 }
 
 h2 {

@@ -10,15 +10,16 @@
 
   <!--? USER PROFILE TILE -->
 
+  <h1 id="hero-title">OPEN PROJEX OPEN PROJEX OPEN PROJEX</h1>
 
-
+ 
   <div class="container d-flex justify-content-center align-items-center">
              
     <div class="pp tile">
 
      <div class="upper">
 
-       <img src="https://wallpaperaccess.com/full/39608.jpg" class="img-fluid">
+       <!-- <img src="https://wallpaperaccess.com/full/39608.jpg" class="img-fluid"> -->
        
      </div>
 
@@ -138,6 +139,7 @@
 </main>
 
   <!-- NEW POST -->
+  
   <form id="new-post" action="/projects" method="POST">
     <div class="bg-modal">
       <div class="modal-content">
@@ -146,14 +148,17 @@
             <div class="col-md-8 col-md-offset-2">
               <h1 class="cp">Create post</h1>
                             <button type="button" class="close">+</button>
-
-              <div class="form-group has-error" name="name"><h2 class="cp2"><%=user.name%></h2>
-                            </div>
-            <div class="form-group has-error" name="gitUsername" >
-            </div>
-
-            <div class="form-group has-error" name="avatar"><img src="<%=user.avatar%>">
+<hr id="post">
+              
+            <!-- <div class="form-group has-error" name="gitUsername" >
+            </div> -->
+ <div id="np-icon">
+            <div class="form-group has-error" name="avatar"><img class="cp-img" src="<%=user.avatar%>">
                         </div>
+
+                        <div class="form-group has-error" name="name"><h2 class="cp2"><%=user.name%></h2>
+                        </div>
+                      </div>
 
                         <div class="cp-fields">
                           <div class="form-group has-error">
@@ -162,6 +167,7 @@
                             </select>
                           </div>
 
+                          <hr id="post2">
 
                 <div class="form-group">
                   <input type="text"
@@ -269,6 +275,7 @@ projectDiv.innerHTML = `
   
     // function to load all projects on page load
     window.onload = async function() {
+      
       try {
         const response = await fetch('/projects');
         const data = await response.json();
