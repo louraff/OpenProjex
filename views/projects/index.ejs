@@ -280,7 +280,6 @@ projectDiv.innerHTML = `
         const response = await fetch('/projects');
         const data = await response.json();
   
-        // data should be an array of projects
         data.forEach(project => {
           let projectList = document.getElementById("project-list")
   
@@ -344,24 +343,6 @@ projectDiv.innerHTML = `
       });
   };
     
-//     async function deleteProject(e) {
-//   e.preventDefault(); 
-
-//   const id = e.target.elements['id'].value;
-
-//   try {
-//     const response = await fetch(`/projects/${id}?_method=DELETE`, {method: 'POST'});
-//     const data = await response.json();
-    
-//     if(data.message) {
-//       window.location.href = '/projects'; 
-//     } else {
-//       console.error(data.error);
-//     }
-//   } catch (error) {
-//     console.error(error);
-//   }
-// };
 
     // Event Listeners
     document.querySelector(".new-project").addEventListener("click", function() {
@@ -369,7 +350,6 @@ projectDiv.innerHTML = `
         fetch(`https://api.github.com/users/${user.gitUsername}/repos`)
     .then(response => response.json())
     .then(data => {
-      // assuming 'githubRepo' is an id of a select dropdown
       const select = document.getElementById('githubRepo');
       data.forEach((repo) => {
         var opt = document.createElement('option');
