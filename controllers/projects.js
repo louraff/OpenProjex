@@ -125,8 +125,8 @@ async function saveProject(req, res) {
 async function likeProject(req, res) {
   try {
     const project = await Project.findById(req.params.id);
-    console.log("project: ", project); // Added logging
-    console.log("req.user: ", req.user); // Added logging
+    console.log("project: ", project); 
+    console.log("req.user: ", req.user); 
 
     if (!project) {
       console.log('Project not found');
@@ -142,6 +142,7 @@ async function likeProject(req, res) {
       project.likes.push(req.user);
     }
     await project.save();
+
     res.redirect('/projects');
   } catch (err) {
     console.log(err);

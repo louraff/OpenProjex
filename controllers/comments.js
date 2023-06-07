@@ -3,6 +3,7 @@ const Comment = require('../models/comment')
 const User = require('../models/user');
 
 
+
 module.exports = {
    create: createComment,
     new: newComment,
@@ -10,7 +11,7 @@ module.exports = {
 }
 
 async function createComment(req, res) {
-    console.log(req.params); // Check the parameters in the request
+    console.log(req.params);
     console.log(req.body); 
     console.log(req.user);
 
@@ -44,7 +45,6 @@ async function createComment(req, res) {
 
 
   async function newComment(req, res) {
-    //Sort performers by their name
     const comments = await Comment.find({})
     res.render('projects/index', { comments });
   }
@@ -53,10 +53,15 @@ async function createComment(req, res) {
     try {
       const projectId = req.params.projectId;
       const commentId = req.params.commentId;
+
+      console.log('Project Id:', projectId); 
+    console.log('Comment Id:', commentId);
+
       const project = await Project.findById(projectId);
   
       // Check if the project exists
       if (!project) {
+        console.log('Project not found'); 
         return res.status(404).send("Project not found.");
       }
   
@@ -65,21 +70,25 @@ async function createComment(req, res) {
   
       // Check if the comment exists
       if (!comment) {
+        console.log('Comment not found'); 
         return res.status(404).send("Comment not found.");
       }
   
       // Check if the current user is the author of the comment
       if (comment.author.toString() !== req.user._id.toString()) {
+        console.log('Unauthorized action');
         return res.status(403).send("Unauthorized action.");
       }
   
       // If the checks pass, delete the comment
-      comment.remove();
-      await project.save();
-  
-      res.redirect(`/projects/${projectId}`);
+      // comment.remove();
+      project.comments.pull(commentId);
+            await project.save();
+      console.log('Comment removed successfully'); 
+      res.redirect('/projects');
     } catch (err) {
       console.log(err);
+      console.log('An error occurred:', err);
       res.status(500).send("An error occurred while trying to delete the comment.");
     }
   }
