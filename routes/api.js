@@ -4,20 +4,18 @@ var router = express.Router();
 const fetch = require('node-fetch');
 
 const token = process.env.GITHUB_TOKEN;
-// Add the line below
+
 const ROOT_URL = 'https://api.github.com';
 
 router.get('/', async function(req, res, next) {
     // const ROOT_URL = 'https://api.github.com';
 console.log(ROOT_URL)
-  // Use Express's req.query object to 
-  // access query parameters
+ 
   console.log(req.query);
 
   const username = req.query.username;
   console.log(`username: ${username}`)
-  // If this is not a "search",
-  // just render the index view
+ 
   if (!username) return res.render('api', {title: 'Github Users', userData: null});
 
   const options = {
@@ -25,8 +23,7 @@ console.log(ROOT_URL)
       Authorization: `token ${token}`
     }
   };
-  // Temporarily, we'll pass the token
-  // in a querystring
+ 
   const userData = await fetch(`${ROOT_URL}/users/${username}`, options)
   .then(res => res.json());
   console.log(userData);
@@ -37,6 +34,18 @@ console.log(userData.repos[0]);
 res.render('api', { userData });
 });
 
+router.get('/user/repos', async function(req, res, next) {
+    const username = req.user.gitUsername; 
+    const options = {
+      headers: {
+        Authorization: `token ${token}` 
+      }
+    };
+    const repos = await fetch(`${ROOT_URL}/users/${username}/repos`, options)
+      .then(res => res.json());
+    res.json(repos);
+  });
+  
 
 module.exports = router;
 
